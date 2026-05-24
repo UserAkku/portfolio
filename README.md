@@ -1,8 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Akhilesh Kumar — Minimalist Portfolio
 
-## Getting Started
+A highly minimal, story-driven, black and white portfolio website built for a Full-Stack Developer. The design focuses on extreme symmetry, strong typography, and a distraction-free user experience, allowing the work to speak for itself.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Fonts:** Space Grotesk (Headings) & Inter (Body) via Google Fonts
+
+## 🛠️ Features
+
+- **Strict B&W Aesthetic:** No colors, just pure black, white, and shades of gray.
+- **Story-Driven Flow:** Sections blend seamlessly into one another telling a continuous story.
+- **Custom Scroll Animations:** Handcrafted scroll reveal animations using the native `IntersectionObserver` API.
+- **Custom Cursor:** A subtle, custom dot cursor that replaces the default pointer.
+- **Grain Overlay:** A subtle SVG noise texture overlay that adds depth and a premium feel.
+- **Responsive Design:** Completely fluid and responsive down to mobile devices.
+- **Contact Form:** Ready-to-use contact form integrated via [Formspree](https://formspree.io/).
+
+## 💻 Getting Started
+
+First, clone the repository and install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +40,22 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Required Assets Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To make this portfolio fully yours, you need to add a few assets to the `public/` folder and update your links:
 
-## Learn More
+1. **Resume PDF**: Place your resume in the `public/` directory and name it `resume.pdf`.
+2. **Project Images**: Place your project showcase images in the `public/` directory. By default, the code looks for:
+   - `scrutin.jpg`
+   - `shadowscale.jpg`
+   - `lustra.jpg`
+3. **Formspree Setup**: Go to `src/components/sections/Contact.tsx` and replace the placeholder Formspree URL with your actual Formspree endpoint.
+4. **Social Links**: Update your GitHub, LinkedIn, and Live Demo links in `Contact.tsx` and `Projects.tsx`.
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
