@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 w-full border-t border-gray-200 bg-white">
+    <section id="contact" className="py-20 md:py-32 px-6 w-full border-t border-gray-200 bg-white">
       <div className="max-w-[1200px] mx-auto">
         <FadeIn>
           <div className="mb-20 text-center md:text-left">
@@ -131,13 +131,13 @@ export default function Contact() {
               </span>
               <a
                 href="mailto:akhileshkumaroffical@gmail.com"
-                className="group flex items-center gap-2 text-xl md:text-2xl font-bold text-black w-max"
+                className="group flex items-start sm:items-center gap-2 text-xl md:text-2xl font-bold text-black max-w-full"
               >
-                <span className="relative overflow-hidden">
+                <span className="relative overflow-hidden break-all sm:break-normal">
                   akhileshkumaroffical@gmail.com
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                 </span>
-                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0 mt-1 sm:mt-0" />
               </a>
             </div>
 
@@ -149,13 +149,13 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/akhilesh-kumar-736794313"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 text-xl md:text-2xl font-bold text-black w-max"
+                className="group flex items-start sm:items-center gap-2 text-xl md:text-2xl font-bold text-black max-w-full"
               >
-                <span className="relative overflow-hidden">
+                <span className="relative overflow-hidden break-all sm:break-normal">
                   https://linkedin.com/in/akhilesh-kumar-736794313
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                 </span>
-                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0 mt-1 sm:mt-0" />
               </a>
             </div>
 
@@ -167,13 +167,13 @@ export default function Contact() {
                 href="https://github.com/UserAkku"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 text-xl md:text-2xl font-bold text-black w-max"
+                className="group flex items-start sm:items-center gap-2 text-xl md:text-2xl font-bold text-black max-w-full"
               >
-                <span className="relative overflow-hidden">
+                <span className="relative overflow-hidden break-all sm:break-normal">
                   https://github.com/UserAkku
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                 </span>
-                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0 mt-1 sm:mt-0" />
               </a>
             </div>
           </FadeIn>

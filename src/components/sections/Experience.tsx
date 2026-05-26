@@ -17,7 +17,7 @@ const EXPERIENCES = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 px-6 w-full border-t border-gray-200">
+    <section id="experience" className="py-20 md:py-32 px-6 w-full border-t border-gray-200">
       <div className="max-w-[1200px] mx-auto">
         <FadeIn>
           <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest mb-16">
@@ -37,7 +37,7 @@ export default function Experience() {
                     <h3 className="font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide">
                       {exp.title}
                     </h3>
-                    <p className="text-lg md:text-xl text-gray-800 mt-1">
+                    <p className="text-base md:text-xl text-gray-800 mt-1">
                       {exp.company} {exp.location}
                     </p>
                   </div>

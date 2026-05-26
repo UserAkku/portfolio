@@ -21,7 +21,7 @@ const SKILL_GROUPS = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-32 px-6 w-full border-t border-gray-200">
+    <section id="skills" className="py-20 md:py-32 px-6 w-full border-t border-gray-200">
       <div className="max-w-[1200px] mx-auto">
         <FadeIn>
           <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest mb-16 text-center md:text-left">
