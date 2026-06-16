@@ -11,11 +11,34 @@ const SKILL_GROUPS = [
   },
   {
     category: "Databases",
-    skills: ["PostgreSQL", "MongoDB"],
+    skills: ["PostgreSQL", "MongoDB", "pgvector", "Pinecone", "Weaviate", "Qdrant", "ChromaDB", "Redis", "Milvus"],
+  },
+  {
+    category: "DevOps & Cloud",
+    skills: ["AWS", "Docker", "Kubernetes", "Vercel", "Netlify","render", "Railway"],
+  },
+  {
+    category: "AI & ML",
+    skills: [
+      "RAG",
+      "Fine-tuning",
+      "Prompt Engineering",
+      "LangChain",
+      "LlamaIndex",
+      "LangGraph",
+      "MCP",
+      "AI Agents",
+      "Agentic AI",
+      "Anthropic API",
+      "Embeddings",
+      "GenAI",
+      "NumPy",
+      "Pandas",
+    ],
   },
   {
     category: "Tools & Others",
-    skills: ["Git", "GitHub", "Puppeteer", "RAG", "GenAI", "Analytics", "NumPy", "Pandas"],
+    skills: ["Git", "GitHub", "Puppeteer", "Analytics"],
   },
 ];
 

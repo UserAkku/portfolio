@@ -11,7 +11,7 @@ const PROJECTS = [
       "An automated website auditing platform running 200+ deep checks across Performance, SEO, Security, Accessibility, and UX. Built with Next.js 14, Tailwind CSS, PostgreSQL, Puppeteer, and Google Gemini AI for smart issue remediation. Delivers actionable PDF reports in minutes through a Neo-Brutalist UI.",
     stack: ["Next.js 14", "TypeScript", "PostgreSQL", "Puppeteer", "Gemini AI", "Tailwind"],
     github: "https://github.com/UserAkku/scrutin",
-    live: "https://scrutin.vercel.app/",
+    live: "https://scrutin.akhileshkumar.in/",
     image: "scrutin.png",
   },
   {
@@ -21,7 +21,7 @@ const PROJECTS = [
       "A distributed URL shortener with microservices architecture, JWT auth, database sharding, and real-time analytics (clicks, devices, countries). Features an anonymous link-claiming system with circuit breaker pattern and abuse detection.",
     stack: ["Node.js", "TypeScript", "PostgreSQL", "Next.js", "JWT"],
     github: "https://github.com/UserAkku/shadowscale",
-    live: "https://shadowscale.vercel.app/",
+    live: "https://shadowscale.akhileshkumar.in/",
     image: "shadowscale.png",
   },
   {
@@ -31,7 +31,7 @@ const PROJECTS = [
       "A responsive premium e-commerce website for skincare with seamless cart, checkout, and dynamic content management. Achieved 35% faster page loads and consistent responsiveness using Context API and JSON-based product management.",
     stack: ["Next.js", "React", "Tailwind CSS", "Context API"],
     github: "https://github.com/UserAkku/LustraSkin",
-    live: "https://lustra-skin-t4vs.vercel.app/",
+    live: "https://lustra.akhileshkumar.in/",
     image: "lustra.png",
   },
 ];
