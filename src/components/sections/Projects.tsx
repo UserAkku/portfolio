@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 import FadeIn from "../FadeIn";
 
 const PROJECTS = [
@@ -70,16 +69,18 @@ export default function Projects() {
                     isEven ? "lg:flex-row-reverse" : "lg:flex-row"
                   } items-center`}
                 >
-                  {/* IMAGE SIDE */}
-                  <div className="w-full lg:w-1/2 overflow-hidden border border-black bg-white relative aspect-video">
-                    <Image
-                      src={project.image}
-                      alt={`${project.title} project preview`}
-                      fill
-                      className="object-cover"
-                      priority={isPriority}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
+                  {/* IMAGE SIDE — aspect-[16/9] wrapper prevents CLS */}
+                  <div className="w-full lg:w-1/2 overflow-hidden border border-black bg-gray-100">
+                    <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                      <img
+                        src={project.image}
+                        alt={`${project.title} project preview`}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        fetchPriority={isPriority ? "high" : "low"}
+                        loading={isPriority ? "eager" : "lazy"}
+                        decoding={isPriority ? "sync" : "async"}
+                      />
+                    </div>
                   </div>
 
                   {/* DETAILS SIDE */}
