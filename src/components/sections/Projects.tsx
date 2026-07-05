@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import FadeIn from "../FadeIn";
 
 const PROJECTS = [
@@ -10,7 +11,7 @@ const PROJECTS = [
       "A cinematic, full-stack creative agency portfolio website with GSAP + ScrollTrigger animations, Lenis smooth scroll, and a custom morphing cursor. Features 7 pages including a Brands showcase with clip-path image reveals, parallax scroll, multi-field contact form (React Hook Form + Zod + Web3Forms), and Vercel + Google Analytics integration.",
     stack: ["Next.js 14", "TypeScript", "GSAP", "Framer Motion", "Tailwind CSS", "Zod", "Web3Forms"],
     live: "https://www.madworldd.com",
-    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262625/Screenshot_2026-07-05_at_8.04.30_PM_cwy7pq.png",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1783262625/Screenshot_2026-07-05_at_8.04.30_PM_cwy7pq.png",
   },
   {
     title: "LUSTRA SKIN",
@@ -19,7 +20,7 @@ const PROJECTS = [
     stack: ["Next.js", "React", "Tailwind CSS", "Context API"],
     github: "https://github.com/UserAkku/LustraSkin",
     live: "https://lustra-skin-t4vs.vercel.app/",
-    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262846/lustra_uev0ih.png",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1783262846/lustra_uev0ih.png",
   },
   {
     title: "MADDWORLD CREATIVE",
@@ -27,7 +28,7 @@ const PROJECTS = [
       "A full-service creative agency SPA built for a real client. Features staggered GSAP text animations, animated SVG path drawing, count-up statistics, infinite marquee ticker, tabbed portfolio with category filters, masonry grid, fullscreen lightbox with keyboard navigation, and a Web3Forms-powered contact form with Zod validation.",
     stack: ["Next.js 14", "TypeScript", "Framer Motion", "Tailwind CSS", "React Hook Form", "Zod", "Web3Forms"],
     live: "https://maddworldcreative.com",
-    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262942/Screenshot_2026-07-05_at_8.18.24_PM_qsx6ht.png",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1783262942/Screenshot_2026-07-05_at_8.18.24_PM_qsx6ht.png",
   },
   {
     title: "SCRUTIN",
@@ -36,9 +37,10 @@ const PROJECTS = [
     stack: ["Next.js 14", "TypeScript", "PostgreSQL", "Puppeteer", "Gemini AI", "Tailwind"],
     github: "https://github.com/UserAkku/scrutin",
     live: "https://scrutin.akhileshkumar.in/",
-    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262800/scrutin_vpxukq.png",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1783262800/scrutin_vpxukq.png",
   },
 ];
+
 
 export default function Projects() {
   return (
@@ -58,6 +60,8 @@ export default function Projects() {
         <div className="flex flex-col gap-32">
           {PROJECTS.map((project, index) => {
             const isEven = index % 2 === 1;
+            // First image gets priority loading to fix LCP
+            const isPriority = index === 0;
 
             return (
               <FadeIn key={project.title} delay={100}>
@@ -67,17 +71,14 @@ export default function Projects() {
                   } items-center`}
                 >
                   {/* IMAGE SIDE */}
-                  <div className="w-full lg:w-1/2 overflow-hidden border border-black group bg-white">
-                    <img
+                  <div className="w-full lg:w-1/2 overflow-hidden border border-black bg-white relative aspect-video">
+                    <Image
                       src={project.image}
-                      alt={`${project.title} preview`}
-                      className="w-full h-auto object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.opacity = '0';
-                      }}
-                      onLoad={(e) => {
-                        (e.target as HTMLImageElement).style.opacity = '1';
-                      }}
+                      alt={`${project.title} project preview`}
+                      fill
+                      className="object-cover"
+                      priority={isPriority}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
 
