@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://www.akhileshkumar.in/sitemap.xml",
-    host: "https://www.akhileshkumar.in",
+    sitemap: "https://akhileshkumar.in/sitemap.xml",
+    host: "https://akhileshkumar.in",
   };
 }
