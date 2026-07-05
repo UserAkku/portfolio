@@ -5,34 +5,38 @@ import FadeIn from "../FadeIn";
 
 const PROJECTS = [
   {
+    title: "MADDWORLD",
+    summary:
+      "A cinematic, full-stack creative agency portfolio website with GSAP + ScrollTrigger animations, Lenis smooth scroll, and a custom morphing cursor. Features 7 pages including a Brands showcase with clip-path image reveals, parallax scroll, multi-field contact form (React Hook Form + Zod + Web3Forms), and Vercel + Google Analytics integration.",
+    stack: ["Next.js 14", "TypeScript", "GSAP", "Framer Motion", "Tailwind CSS", "Zod", "Web3Forms"],
+    live: "https://www.madworldd.com",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262625/Screenshot_2026-07-05_at_8.04.30_PM_cwy7pq.png",
+  },
+  {
+    title: "LUSTRA SKIN",
+    summary:
+      "A responsive premium e-commerce website for skincare with seamless cart, checkout, and dynamic content management. Achieved 35% faster page loads and consistent responsiveness using Context API and JSON-based product management.",
+    stack: ["Next.js", "React", "Tailwind CSS", "Context API"],
+    github: "https://github.com/UserAkku/LustraSkin",
+    live: "https://lustra-skin-t4vs.vercel.app/",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262846/lustra_uev0ih.png",
+  },
+  {
+    title: "MADDWORLD CREATIVE",
+    summary:
+      "A full-service creative agency SPA built for a real client. Features staggered GSAP text animations, animated SVG path drawing, count-up statistics, infinite marquee ticker, tabbed portfolio with category filters, masonry grid, fullscreen lightbox with keyboard navigation, and a Web3Forms-powered contact form with Zod validation.",
+    stack: ["Next.js 14", "TypeScript", "Framer Motion", "Tailwind CSS", "React Hook Form", "Zod", "Web3Forms"],
+    live: "https://maddworldcreative.com",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262942/Screenshot_2026-07-05_at_8.18.24_PM_qsx6ht.png",
+  },
+  {
     title: "SCRUTIN",
-    date: "April 2026",
     summary:
       "An automated website auditing platform running 200+ deep checks across Performance, SEO, Security, Accessibility, and UX. Built with Next.js 14, Tailwind CSS, PostgreSQL, Puppeteer, and Google Gemini AI for smart issue remediation. Delivers actionable PDF reports in minutes through a Neo-Brutalist UI.",
     stack: ["Next.js 14", "TypeScript", "PostgreSQL", "Puppeteer", "Gemini AI", "Tailwind"],
     github: "https://github.com/UserAkku/scrutin",
     live: "https://scrutin.akhileshkumar.in/",
-    image: "scrutin.png",
-  },
-  {
-    title: "SHADOWSCALE",
-    date: "February 2026",
-    summary:
-      "A distributed URL shortener with microservices architecture, JWT auth, database sharding, and real-time analytics (clicks, devices, countries). Features an anonymous link-claiming system with circuit breaker pattern and abuse detection.",
-    stack: ["Node.js", "TypeScript", "PostgreSQL", "Next.js", "JWT"],
-    github: "https://github.com/UserAkku/shadowscale",
-    live: "https://shadowscale.akhileshkumar.in/",
-    image: "shadowscale.png",
-  },
-  {
-    title: "LUSTRA SKIN",
-    date: "May 2025",
-    summary:
-      "A responsive premium e-commerce website for skincare with seamless cart, checkout, and dynamic content management. Achieved 35% faster page loads and consistent responsiveness using Context API and JSON-based product management.",
-    stack: ["Next.js", "React", "Tailwind CSS", "Context API"],
-    github: "https://github.com/UserAkku/LustraSkin",
-    live: "https://lustra.akhileshkumar.in/",
-    image: "lustra.png",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/v1783262800/scrutin_vpxukq.png",
   },
 ];
 
@@ -100,15 +104,17 @@ export default function Projects() {
 
                     {/* Buttons */}
                     <div className="flex flex-wrap gap-4">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-center gap-2 px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
-                      >
-                        GitHub
-                        <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </a>
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center justify-center gap-2 px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
+                        >
+                          GitHub
+                          <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
+                      )}
                       <a
                         href={project.live}
                         target="_blank"

@@ -3,6 +3,18 @@ import FadeIn from "../FadeIn";
 const EXPERIENCES = [
   {
     title: "Full-Stack Developer Intern",
+    company: "Maddworld",
+    location: "Remote",
+    duration: "June 2026 – Present",
+    points: [
+      "Designing, building & shipping websites across multiple business domains.",
+      "Contributing to end-to-end development of large-scale tech products.",
+      "Shaping product & business strategy features, priorities, and direction.",
+      "Working on technical architecture for scalable systems.",
+    ],
+  },
+  {
+    title: "Full-Stack Developer Intern",
     company: "Nocage (formerly Bridein)",
     location: "New Delhi",
     duration: "June 2025 – December 2025",
@@ -28,7 +40,7 @@ export default function Experience() {
         <div className="max-w-4xl border-l border-black ml-2 md:ml-4">
           {EXPERIENCES.map((exp, index) => (
             <FadeIn key={index} delay={index * 200}>
-              <div className="relative pl-8 md:pl-12 pb-16 last:pb-0">
+              <div className={`relative pl-8 md:pl-12 ${index === EXPERIENCES.length - 1 ? 'pb-0' : 'pb-24'}`}>
                 {/* Timeline dot */}
                 <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] bg-black rounded-full" />
                 
@@ -38,7 +50,7 @@ export default function Experience() {
                       {exp.title}
                     </h3>
                     <p className="text-base md:text-xl text-gray-800 mt-1">
-                      {exp.company} {exp.location}
+                      {exp.company} · {exp.location}
                     </p>
                   </div>
                   <span className="text-sm font-bold uppercase tracking-widest text-gray-500 mt-2 md:mt-0 whitespace-nowrap md:ml-4">

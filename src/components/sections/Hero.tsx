@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import FadeIn from "../FadeIn";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const fullText = "Full-Stack Developer I don't just write code, I think about why it's written that way.";
@@ -49,15 +49,6 @@ export default function Hero() {
             >
               View My Work
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            
-            <a
-              href="/resume.pdf"
-              download
-              className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-black border border-black hover:bg-black hover:text-white transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
-            >
-              Download Resume
-              <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
             </a>
           </div>
         </FadeIn>

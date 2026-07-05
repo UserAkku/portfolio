@@ -131,13 +131,13 @@ export default function Contact() {
               </span>
               <a
                 href="mailto:akhileshkumaroffical@gmail.com"
-                className="group flex items-start sm:items-center gap-2 text-xl md:text-2xl font-bold text-black max-w-full"
+                className="group inline-block text-xl md:text-2xl font-bold text-black max-w-full"
               >
-                <span className="relative overflow-hidden break-all sm:break-normal">
+                <span className="relative overflow-hidden break-all sm:break-normal inline-block align-middle">
                   akhileshkumaroffical@gmail.com
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                 </span>
-                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0 mt-1 sm:mt-0" />
+                <ArrowUpRight size={24} className="inline-block align-middle ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
 
@@ -149,13 +149,13 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/akhilesh-kumar-736794313"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start sm:items-center gap-2 text-xl md:text-2xl font-bold text-black max-w-full"
+                className="group inline-block text-xl md:text-2xl font-bold text-black max-w-full"
               >
-                <span className="relative overflow-hidden break-all sm:break-normal">
+                <span className="relative overflow-hidden break-all sm:break-normal inline-block align-middle">
                   https://linkedin.com/in/akhilesh-kumar-736794313
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                 </span>
-                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0 mt-1 sm:mt-0" />
+                <ArrowUpRight size={24} className="inline-block align-middle ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
 
@@ -167,13 +167,13 @@ export default function Contact() {
                 href="https://github.com/UserAkku"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start sm:items-center gap-2 text-xl md:text-2xl font-bold text-black max-w-full"
+                className="group inline-block text-xl md:text-2xl font-bold text-black max-w-full"
               >
-                <span className="relative overflow-hidden break-all sm:break-normal">
+                <span className="relative overflow-hidden break-all sm:break-normal inline-block align-middle">
                   https://github.com/UserAkku
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                 </span>
-                <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0 mt-1 sm:mt-0" />
+                <ArrowUpRight size={24} className="inline-block align-middle ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
           </FadeIn>
