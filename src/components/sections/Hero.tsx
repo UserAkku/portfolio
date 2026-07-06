@@ -55,7 +55,7 @@ export default function Hero() {
 
         <FadeIn delay={300}>
           {/* Static part renders immediately — never hidden, great for LCP */}
-          <p className="text-lg md:text-2xl text-gray-800 max-w-3xl mb-12 min-h-[4rem] md:min-h-[2rem] flex items-center justify-center">
+          <p className="text-lg md:text-2xl text-gray-800 max-w-3xl mb-12 min-h-[4rem] md:min-h-[2rem]">
             <span>{STATIC_TEXT}</span>
             <span aria-live="polite">{typedPart}</span>
           </p>
