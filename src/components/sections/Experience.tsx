@@ -29,8 +29,8 @@ const EXPERIENCES = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 md:py-32 px-6 w-full border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto">
+    <section id="experience" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-gray-200">
+      <div className="max-w-[1200px] mx-auto w-full">
         <FadeIn>
           <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest mb-16">
             Where I've Worked

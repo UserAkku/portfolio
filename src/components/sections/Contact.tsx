@@ -36,8 +36,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 px-6 w-full border-t border-gray-200 bg-white">
-      <div className="max-w-[1200px] mx-auto">
+    <section id="contact" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-gray-200 bg-white">
+      <div className="max-w-[1200px] mx-auto w-full">
         <FadeIn>
           <div className="mb-20 text-center md:text-left">
             <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest leading-none mb-4">

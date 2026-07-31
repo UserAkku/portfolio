@@ -44,7 +44,7 @@ export default function Hero() {
     <section
       id="hero"
       aria-label="Hero section"
-      className="min-h-screen flex flex-col items-center justify-center relative px-6 w-full"
+      className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-12 w-full"
     >
       <div className="max-w-[1200px] mx-auto w-full flex flex-col items-center text-center">
         <FadeIn delay={100}>

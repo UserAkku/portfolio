@@ -2,8 +2,8 @@ import FadeIn from "../FadeIn";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-32 px-6 w-full border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto">
+    <section id="about" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-gray-200">
+      <div className="max-w-[1200px] mx-auto w-full">
         <FadeIn>
           <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest mb-12">
             The Story So Far
