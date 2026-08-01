@@ -75,14 +75,14 @@ const PROJECTS = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-gray-200">
+    <section id="projects" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-white/10">
       <div className="max-w-[1200px] mx-auto w-full">
         <FadeIn>
           <div className="mb-20">
-            <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest leading-none mb-4">
+            <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest leading-none mb-4 text-foreground">
               Things I've Built
             </h2>
-            <p className="text-xl md:text-2xl text-gray-500 font-medium tracking-wide">
+            <p className="text-xl md:text-2xl text-zinc-500 font-medium tracking-wide">
               Each project is a problem I decided to solve.
             </p>
           </div>
@@ -102,7 +102,7 @@ export default function Projects() {
                   } items-center`}
                 >
                   {/* IMAGE SIDE — aspect-[16/9] wrapper prevents CLS */}
-                  <div className="w-full lg:w-1/2 overflow-hidden border border-black bg-gray-100">
+                  <div className="w-full lg:w-1/2 overflow-hidden border border-white/10 bg-zinc-900">
                     <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                       <img
                         src={project.image}
@@ -117,10 +117,10 @@ export default function Projects() {
 
                   {/* DETAILS SIDE */}
                   <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                    <h3 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-tight mb-6">
+                    <h3 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-tight mb-6 text-foreground">
                       {project.title}
                     </h3>
-                    <p className="text-lg text-gray-800 leading-relaxed mb-8">
+                    <p className="text-lg text-zinc-400 leading-relaxed mb-8">
                       {project.summary}
                     </p>
 
@@ -129,7 +129,7 @@ export default function Projects() {
                       {project.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border border-gray-300 text-gray-600"
+                          className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border border-white/10 text-zinc-400"
                         >
                           {tech}
                         </span>
@@ -143,7 +143,7 @@ export default function Projects() {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center justify-center gap-2 px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
+                          className="group flex items-center justify-center gap-2 px-6 py-3 border border-white/20 text-foreground hover:bg-white hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
                         >
                           GitHub
                           <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -153,7 +153,7 @@ export default function Projects() {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center justify-center gap-2 px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
+                        className="group flex items-center justify-center gap-2 px-6 py-3 border border-white/20 text-foreground hover:bg-white hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
                       >
                         Live Demo
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

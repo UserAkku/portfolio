@@ -29,39 +29,39 @@ const EXPERIENCES = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-gray-200">
+    <section id="experience" className="py-20 md:py-32 px-6 md:px-12 w-full border-t border-white/10">
       <div className="max-w-[1200px] mx-auto w-full">
         <FadeIn>
-          <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest mb-16">
+          <h2 className="font-heading text-[clamp(32px,5vw,64px)] font-bold uppercase tracking-widest mb-16 text-foreground">
             Where I've Worked
           </h2>
         </FadeIn>
 
-        <div className="max-w-4xl border-l border-black ml-2 md:ml-4">
+        <div className="max-w-4xl border-l border-white/10 ml-2 md:ml-4">
           {EXPERIENCES.map((exp, index) => (
             <FadeIn key={index} delay={index * 200}>
               <div className={`relative pl-8 md:pl-12 ${index === EXPERIENCES.length - 1 ? 'pb-0' : 'pb-24'}`}>
                 {/* Timeline dot */}
-                <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] bg-black rounded-full" />
+                <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] bg-white rounded-full" />
                 
                 <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-4">
                   <div>
-                    <h3 className="font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide">
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide text-foreground">
                       {exp.title}
                     </h3>
-                    <p className="text-base md:text-xl text-gray-800 mt-1">
+                    <p className="text-base md:text-xl text-zinc-300 mt-1">
                       {exp.company} · {exp.location}
                     </p>
                   </div>
-                  <span className="text-sm font-bold uppercase tracking-widest text-gray-500 mt-2 md:mt-0 whitespace-nowrap md:ml-4">
+                  <span className="text-sm font-bold uppercase tracking-widest text-zinc-500 mt-2 md:mt-0 whitespace-nowrap md:ml-4">
                     {exp.duration}
                   </span>
                 </div>
 
                 <ul className="space-y-3 mt-6">
                   {exp.points.map((point, i) => (
-                    <li key={i} className="flex text-base md:text-lg text-gray-800">
-                      <span className="mr-3 mt-1.5 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
+                    <li key={i} className="flex text-base md:text-lg text-zinc-400">
+                      <span className="mr-3 mt-1.5 w-1.5 h-1.5 bg-zinc-600 rounded-full flex-shrink-0" />
                       {point}
                     </li>
                   ))}

@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const NAV_LINKS = [
-  { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
@@ -26,13 +26,19 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full px-6 md:px-12 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-sm border-b border-gray-200 py-4" : "bg-transparent py-6"
+        scrolled ? "bg-background/90 backdrop-blur-sm border-b border-white/10 py-4" : "bg-transparent py-6"
       }`}
     >
       <div className="max-w-[1200px] mx-auto w-full flex justify-between items-center">
-        <a href="#hero" className="flex items-center hover:opacity-80 transition-opacity">
-          <img src="/logo.svg" alt="Akhilesh Kumar Logo" className="h-12 md:h-16 w-auto" />
-        </a>
+        <motion.a
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          href="#hero" 
+          className="text-xl font-bold tracking-wider text-foreground hover:opacity-80 transition-opacity"
+        >
+          akku.
+        </motion.a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-8">
@@ -40,7 +46,7 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm uppercase tracking-widest text-black hover:opacity-50 transition-opacity"
+              className="text-sm font-medium tracking-widest text-foreground/60 transition-colors hover:text-foreground uppercase"
             >
               {link.name}
             </a>
@@ -48,23 +54,26 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Nav Toggle */}
-        <button
-          className="md:hidden text-black p-2"
+        <motion.button
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="md:hidden text-foreground p-2"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        </motion.button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 py-6 px-6 flex flex-col gap-6 shadow-sm">
+        <div className="md:hidden absolute top-full left-0 w-full bg-background border-b border-white/10 py-6 px-6 flex flex-col gap-6 shadow-sm">
           {NAV_LINKS.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-lg uppercase tracking-widest text-black font-heading font-bold"
+              className="text-lg uppercase tracking-widest text-foreground font-heading font-bold"
               onClick={() => setIsOpen(false)}
             >
               {link.name}

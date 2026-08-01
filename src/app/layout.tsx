@@ -135,7 +135,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-white text-black bg-grain`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
         {children}
         <Analytics />

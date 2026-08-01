@@ -1,87 +1,100 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import FadeIn from "../FadeIn";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon, TwitterIcon } from "../Icons";
 
-// Split into two parts so the static "Full-Stack Developer" is visible instantly
-const STATIC_TEXT = "Full-Stack Developer";
-const TYPED_TEXT = " I don't just write code, I think about why it's written that way.";
+const socialLinks = [
+  { icon: GithubIcon, href: "https://github.com/UserAkku" },
+  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/akhilesh-kumar-736794313" },
+  { icon: TwitterIcon, href: "https://twitter.com/akhileshkumar" }, // Update if real link exists
+  { icon: Mail, href: "mailto:akhileshkumaroffical@gmail.com" },
+];
 
 export default function Hero() {
-  const [typedPart, setTypedPart] = useState("");
-  const rafRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number | null>(null);
-  const charSpeedMs = 40; // ms per character
-
-  useEffect(() => {
-    // Use requestAnimationFrame instead of setInterval — doesn't block main thread
-    const animate = (timestamp: number) => {
-      if (!startTimeRef.current) startTimeRef.current = timestamp;
-      const elapsed = timestamp - startTimeRef.current;
-      const charsToShow = Math.min(
-        Math.floor(elapsed / charSpeedMs),
-        TYPED_TEXT.length
-      );
-      setTypedPart(TYPED_TEXT.substring(0, charsToShow));
-      if (charsToShow < TYPED_TEXT.length) {
-        rafRef.current = requestAnimationFrame(animate);
-      }
-    };
-
-    // Delay start by 800ms to let FCP happen first
-    const timer = setTimeout(() => {
-      rafRef.current = requestAnimationFrame(animate);
-    }, 800);
-
-    return () => {
-      clearTimeout(timer);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
   return (
     <section
       id="hero"
       aria-label="Hero section"
-      className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-12 w-full"
+      className="relative h-screen w-full overflow-hidden bg-background px-6 md:px-12"
     >
-      <div className="max-w-[1200px] mx-auto w-full flex flex-col items-center text-center">
-        <FadeIn delay={100}>
-          <h1 className="font-heading text-[clamp(36px,10vw,100px)] font-bold uppercase tracking-tighter leading-none mb-6 break-words">
-            Akhilesh Kumar
-          </h1>
-        </FadeIn>
+      {/* Yellow Circle (Behind) */}
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        className="absolute top-[54%] lg:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 h-[400px] w-[400px] md:h-[800px] md:w-[800px] lg:h-[550px] lg:w-[550px] rounded-full bg-yellow-400"
+      />
 
-        <FadeIn delay={300}>
-          {/* Static part renders immediately — never hidden, great for LCP */}
-          <p className="text-lg md:text-2xl text-gray-800 max-w-3xl mb-12 min-h-[4rem] md:min-h-[2rem]">
-            <span>{STATIC_TEXT}</span>
-            <span aria-live="polite">{typedPart}</span>
+      {/* Main Container for positioned content */}
+      <div className="relative w-full h-full max-w-[1200px] mx-auto flex items-center justify-center">
+        
+        {/* Left Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="absolute left-0 z-20 max-w-xs hidden lg:block"
+        >
+          <p className="text-sm md:text-base leading-relaxed text-foreground/80 font-medium mb-4">
+            Engineering digital experiences with precision. I focus on clean architecture, scalable systems, and pixel-perfect design to bring ideas to life.
           </p>
-        </FadeIn>
+          <a href="#about" className="text-sm font-bold tracking-widest uppercase border-b border-foreground/30 hover:border-foreground transition-colors pb-1">
+            Read More
+          </a>
+        </motion.div>
 
-        <FadeIn delay={500}>
-          <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
-            <a
-              href="#projects"
-              className="group flex items-center justify-center gap-2 px-8 py-4 bg-black text-white border border-black hover:bg-white hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
+        {/* Right Text - z-10 so it's behind the image but above the circle */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="absolute left-[65%] top-[50%] -translate-y-1/2 -mt-2 z-10 hidden lg:block pointer-events-none"
+        >
+          <h1 className="text-7xl lg:text-[150px] font-extrabold text-foreground tracking-tighter leading-[0.85] font-heading lowercase whitespace-nowrap">
+            code is
+            <br />
+            art.
+          </h1>
+        </motion.div>
+
+        {/* Center Image - z-20 so it's above the right text */}
+        <motion.img
+          src="https://res.cloudinary.com/docksqg0c/image/upload/v1785567791/ChatGPT_Image_Aug_1_2026_12_32_29_PM_q2nhcp.png"
+          alt="Akhilesh Kumar"
+          // We anchor to the absolute bottom. h-[115vh] makes it overflow the top on desktop.
+          className="absolute bottom-0 lg:-bottom-10 left-1/2 -translate-x-1/2 lg:-translate-x-[55%] z-20 h-[75vh] md:h-[85vh] lg:h-[115vh] w-auto object-cover object-bottom drop-shadow-2xl pointer-events-none"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+        />
+
+        {/* Mobile / Tablet Stacked Layout */}
+        <div className="w-full h-full flex flex-col items-center justify-between pt-[15vh] pb-8 md:pb-12 z-30 lg:hidden relative pointer-events-none">
+            <motion.h1 
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6, delay: 0.5 }}
+               className="text-7xl md:text-8xl font-extrabold text-foreground tracking-tighter leading-[0.85] font-heading lowercase text-center whitespace-nowrap pointer-events-auto drop-shadow-lg">
+              code is<br className="md:hidden" /><span className="hidden md:inline"> </span>art.
+            </motion.h1>
+             <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-center max-w-[90%] md:max-w-md mx-auto mt-auto pointer-events-auto bg-black/40 backdrop-blur-xl p-6 rounded-3xl border border-white/10 shadow-2xl"
             >
-              View My Work
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </FadeIn>
+              <p className="text-sm md:text-base leading-relaxed text-foreground/90 font-medium mb-4">
+                Engineering digital experiences with precision. I focus on clean architecture, scalable systems, and pixel-perfect design to bring ideas to life.
+              </p>
+              <a href="#about" className="text-sm font-bold tracking-widest uppercase border-b border-foreground/30 hover:border-foreground transition-colors pb-1">
+                Read More
+              </a>
+            </motion.div>
+        </div>
+
       </div>
 
-      {/* Scroll Indicator */}
-      <div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center gap-2 opacity-50"
-        aria-hidden="true"
-      >
-        <span className="text-xs uppercase tracking-widest font-semibold">Scroll</span>
-        <div className="w-[1px] h-12 bg-black" />
-      </div>
     </section>
   );
 }
