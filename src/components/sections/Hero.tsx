@@ -70,7 +70,7 @@ export default function Hero() {
         />
 
         {/* Mobile / Tablet Stacked Layout */}
-        <div className="w-full h-full flex flex-col items-center justify-between pt-[15vh] pb-8 md:pb-12 z-30 lg:hidden relative pointer-events-none">
+        <div className="w-full h-full flex flex-col items-center justify-between pt-[15vh] pb-16 md:pb-12 z-30 lg:hidden relative pointer-events-none">
             <motion.h1 
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
