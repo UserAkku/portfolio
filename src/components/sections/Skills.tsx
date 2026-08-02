@@ -15,7 +15,7 @@ const SKILL_GROUPS = [
   },
   {
     category: "DevOps & Cloud",
-    skills: ["AWS", "Docker", "Kubernetes", "Vercel", "Netlify","render", "Railway"],
+    skills: ["Vercel", "Netlify", "render", "Railway"],
   },
   {
     category: "AI & ML",
