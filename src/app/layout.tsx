@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: "https://res.cloudinary.com/docksqg0c/image/upload/v1785837882/Screenshot_2026-08-04_at_3.34.32_PM_hcxe09.png",
         width: 1200,
         height: 630,
         alt: "Akhilesh Kumar — Full-Stack Developer Portfolio",
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     description:
       "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
     creator: "@akhileshkumar",
-    images: [`${siteUrl}/og-image.png`],
+    images: ["https://res.cloudinary.com/docksqg0c/image/upload/v1785837882/Screenshot_2026-08-04_at_3.34.32_PM_hcxe09.png"],
   },
   alternates: {
     canonical: siteUrl,
