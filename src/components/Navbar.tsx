@@ -2,18 +2,29 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
-  { name: "Experience", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog";
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +45,7 @@ export default function Navbar() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          href="#hero" 
+          href="/#hero" 
           className="text-xl font-bold tracking-wider text-foreground hover:opacity-80 transition-opacity"
         >
           akku.
@@ -80,6 +91,14 @@ export default function Navbar() {
             </a>
           ))}
         </div>
+      )}
+
+      {/* Reading Progress Bar (only on blog posts) */}
+      {isBlogPost && (
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber-500 origin-left shadow-[0_0_8px_rgba(245,158,11,0.8)]"
+          style={{ scaleX }}
+        />
       )}
     </nav>
   );
