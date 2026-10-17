@@ -62,13 +62,12 @@ const PROJECTS = [
     image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1785525622/Screenshot_2026-08-01_at_12.50.09_AM_mshzky.png",
   },
   {
-    title: "SCRUTIN",
+    title: "KRILLO",
     summary:
       "An automated website auditing platform running 200+ deep checks across Performance, SEO, Security, Accessibility, and UX. Built with Next.js 14, Tailwind CSS, PostgreSQL, Puppeteer, and Google Gemini AI for smart issue remediation. Delivers actionable PDF reports in minutes through a Neo-Brutalist UI.",
     stack: ["Next.js 14", "TypeScript", "PostgreSQL", "Puppeteer", "Gemini AI", "Tailwind"],
-    github: "https://github.com/UserAkku/scrutin",
-    live: "https://scrutin.akhileshkumar.in/",
-    image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1783262800/scrutin_vpxukq.png",
+    live: "https://krillo.tech",
+    image: "https://res.cloudinary.com/docksqg0c/image/upload/f_auto,q_auto/v1792270491/Screenshot_2026-10-18_at_2.23.11_AM_riumsq.png",
   },
 ];
 
