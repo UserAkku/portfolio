@@ -138,6 +138,7 @@ const jsonLd = {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
+          "@id": `${SITE_URL}/services/${service.slug}#service`,
           name: service.name,
           url: `${SITE_URL}/services/${service.slug}`,
         },

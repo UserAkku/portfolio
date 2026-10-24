@@ -4,16 +4,16 @@ import { ArrowRight } from "lucide-react";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
 import { SERVICES, SERVICES_HUB } from "@/lib/services";
-import { SITE_URL, PERSON_ID, toJsonLd } from "@/lib/site";
+import { SITE_URL, PERSON_ID, BASE_OPEN_GRAPH, toJsonLd } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: SERVICES_HUB.metaTitle },
   description: SERVICES_HUB.metaDescription,
   alternates: { canonical: "/services" },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     type: "website",
     url: "/services",
-    siteName: "Akhilesh Kumar",
     title: SERVICES_HUB.metaTitle,
     description: SERVICES_HUB.metaDescription,
   },
@@ -66,7 +66,7 @@ export default function ServicesPage() {
         <section className="pt-36 md:pt-44 pb-20 md:pb-28 px-6 md:px-12 w-full">
           <div className="max-w-[1200px] mx-auto w-full">
             <nav aria-label="Breadcrumb" className="mb-10">
-              <ol className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500">
+              <ol className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-400">
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
                 </li>
@@ -75,7 +75,7 @@ export default function ServicesPage() {
               </ol>
             </nav>
 
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">{SERVICES_HUB.eyebrow}</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">{SERVICES_HUB.eyebrow}</p>
             <h1 className="font-heading text-[clamp(36px,6.5vw,88px)] font-bold uppercase tracking-tight leading-[0.95] mb-8 text-foreground max-w-5xl">
               {SERVICES_HUB.h1}
             </h1>
@@ -94,7 +94,7 @@ export default function ServicesPage() {
                     href={`/services/${s.slug}`}
                     className="group grid grid-cols-[auto_1fr_auto] items-start gap-6 md:gap-10 py-10 md:py-12 text-foreground"
                   >
-                    <span className="text-sm font-bold uppercase tracking-widest text-zinc-500 pt-2">
+                    <span className="text-sm font-bold uppercase tracking-widest text-zinc-400 pt-2 tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="flex flex-col gap-3">
@@ -103,7 +103,7 @@ export default function ServicesPage() {
                     </div>
                     <ArrowRight
                       size={28}
-                      className="mt-1 shrink-0 text-zinc-500 group-hover:text-foreground group-hover:translate-x-1 transition-all"
+                      className="mt-1 shrink-0 text-zinc-400 group-hover:text-foreground group-hover:translate-x-1 transition-all"
                     />
                   </Link>
                 </li>

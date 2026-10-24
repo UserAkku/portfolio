@@ -8,6 +8,10 @@ const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 export interface BlogPost {
   slug: string;
   title: string;
+  /** Optional <=60 char SERP title; the on-page H1 stays `title` */
+  seoTitle?: string;
+  /** Optional 150-160 char meta description; falls back to `excerpt` */
+  description?: string;
   date: string;
   updated?: string;
   excerpt: string;
@@ -43,6 +47,8 @@ export function getAllPosts(): BlogPostMeta[] {
       return {
         slug: data.slug || slug,
         title: data.title || slug,
+        seoTitle: data.seoTitle,
+        description: data.description,
         date: data.date || new Date().toISOString(),
         updated: data.updated,
         excerpt: data.excerpt || "",
@@ -78,6 +84,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
       return {
         slug: fileSlug,
         title: data.title || slug,
+        seoTitle: data.seoTitle,
+        description: data.description,
         date: data.date || new Date().toISOString(),
         updated: data.updated,
         excerpt: data.excerpt || "",

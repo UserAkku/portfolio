@@ -3,7 +3,7 @@ import { getPostBySlug, getAllPosts, formatDate } from "@/lib/blog";
 import { BlogMDX } from "@/components/blog/BlogMDX";
 import Link from "next/link";
 import { Metadata } from "next";
-import { SITE_URL, PERSON_ID, toJsonLd } from "@/lib/site";
+import { SITE_URL, PERSON_ID, BASE_OPEN_GRAPH, toJsonLd } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,17 +26,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // would override it with the 576x1024 portrait hero, which previews crop badly
   const url = `${SITE_URL}/blog/${post.slug}`;
 
+  const description = post.description ?? post.excerpt;
+
   return {
-    title: post.title,
-    description: post.excerpt,
+    // seoTitle is already SERP-length; otherwise the layout template appends the brand
+    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
+    description,
     keywords: post.tags,
     authors: [{ name: "Akhilesh Kumar", url: SITE_URL }],
     openGraph: {
+      ...BASE_OPEN_GRAPH,
       type: "article",
       url,
-      siteName: "Akhilesh Kumar",
       title: post.title,
-      description: post.excerpt,
+      description,
       publishedTime: post.date,
       authors: ["Akhilesh Kumar"],
       tags: post.tags,
@@ -44,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt,
+      description,
     },
     alternates: {
       canonical: url,

@@ -2,7 +2,7 @@ import { getAllPosts } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Metadata } from "next";
 import Link from "next/link";
-import { OG_IMAGE } from "@/lib/site";
+import { OG_IMAGE, BASE_OPEN_GRAPH } from "@/lib/site";
 
 const description =
   "Deeply researched writing on systems engineering, Rust, Bitcoin, API design, and building things that last.";
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "/blog",
   },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     type: "website",
     url: "/blog",
-    siteName: "Akhilesh Kumar",
     title: "Blog — Akhilesh Kumar",
     description,
     images: [OG_IMAGE],
@@ -61,7 +61,7 @@ export default function BlogPage() {
 
           <h1 className="font-heading text-[clamp(42px,7vw,80px)] font-bold text-foreground leading-none tracking-tight mb-4">
             Writing.
-            <span className="sr-only"> Blog by Akhilesh Kumar on web development, Next.js and systems engineering</span>
+            <span className="sr-only"> Blog by Akhilesh Kumar on systems engineering, Rust and Bitcoin</span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
             Deep-dives into systems engineering, Rust, Bitcoin, and the design decisions that shape software.

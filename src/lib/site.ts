@@ -14,6 +14,9 @@ export const OG_IMAGE = {
   alt: "Akhilesh Kumar — freelance full-stack developer portfolio",
 };
 
+/** openGraph is replaced (not merged) per route segment, so every page spreads these in */
+export const BASE_OPEN_GRAPH = { siteName: SITE_NAME, locale: "en_IN" } as const;
+
 export const PERSON = {
   name: "Akhilesh Kumar",
   alternateName: "akku",

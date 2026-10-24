@@ -6,7 +6,7 @@ import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
 import { SERVICES, getService } from "@/lib/services";
 import { getProject } from "@/lib/projects";
-import { SITE_URL, PERSON_ID, toJsonLd } from "@/lib/site";
+import { SITE_URL, PERSON_ID, BASE_OPEN_GRAPH, toJsonLd } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -32,9 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: [service.primaryKeyword, ...service.secondaryKeywords],
     alternates: { canonical: path },
     openGraph: {
+      ...BASE_OPEN_GRAPH,
       type: "website",
       url: path,
-      siteName: "Akhilesh Kumar",
       title: service.metaTitle,
       description: service.metaDescription,
     },
@@ -47,8 +47,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const sectionClass = "py-20 md:py-28 px-6 md:px-12 w-full border-t border-white/10";
-const h2Class =
-  "font-heading text-[clamp(28px,4vw,48px)] font-bold uppercase tracking-widest leading-none mb-12 text-foreground";
+const h2Base =
+  "font-heading text-[clamp(28px,4vw,48px)] font-bold uppercase tracking-widest leading-none text-foreground";
+const h2Class = `${h2Base} mb-12`;
 
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
@@ -66,7 +67,7 @@ export default async function ServicePage({ params }: Props) {
         "@type": "Service",
         "@id": `${url}#service`,
         name: service.name,
-        serviceType: service.primaryKeyword,
+        serviceType: service.name,
         description: service.metaDescription,
         url,
         provider: { "@id": PERSON_ID },
@@ -112,7 +113,7 @@ export default async function ServicePage({ params }: Props) {
         <section className="pt-36 md:pt-44 pb-20 md:pb-28 px-6 md:px-12 w-full">
           <div className="max-w-[1200px] mx-auto w-full">
             <nav aria-label="Breadcrumb" className="mb-10">
-              <ol className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500">
+              <ol className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-400">
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
                 </li>
@@ -125,7 +126,7 @@ export default async function ServicePage({ params }: Props) {
               </ol>
             </nav>
 
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">{service.eyebrow}</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">{service.eyebrow}</p>
             <h1 className="font-heading text-[clamp(36px,6.5vw,88px)] font-bold uppercase tracking-tight leading-[0.95] mb-8 text-foreground max-w-5xl">
               {service.h1}
             </h1>
@@ -156,7 +157,7 @@ export default async function ServicePage({ params }: Props) {
         {/* OVERVIEW */}
         <section className={sectionClass}>
           <div className="max-w-[1200px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20">
-            <h2 className={`${h2Class} mb-0`}>{service.overviewHeading}</h2>
+            <h2 className={h2Base}>{service.overviewHeading}</h2>
             <div className="flex flex-col gap-6 text-lg text-zinc-400 leading-relaxed">
               {service.overview.map((para, i) => (
                 <p key={i}>{para}</p>
@@ -186,7 +187,7 @@ export default async function ServicePage({ params }: Props) {
         <section className={sectionClass}>
           <div className="max-w-[1200px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16">
             <div>
-              <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-500 mb-6 border-b border-white/10 pb-2">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-6 border-b border-white/10 pb-2">
                 Who this is for
               </h2>
               <ul className="space-y-4">
@@ -199,7 +200,7 @@ export default async function ServicePage({ params }: Props) {
               </ul>
             </div>
             <div>
-              <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-500 mb-6 border-b border-white/10 pb-2">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-6 border-b border-white/10 pb-2">
                 Tech stack
               </h2>
               <div className="flex flex-wrap gap-3">
@@ -224,7 +225,7 @@ export default async function ServicePage({ params }: Props) {
               {service.process.map((step, i) => (
                 <li key={step.title} className={`relative pl-8 md:pl-12 ${i === service.process.length - 1 ? "pb-0" : "pb-14"}`}>
                   <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] bg-white rounded-full" />
-                  <p className="text-sm font-bold uppercase tracking-widest text-zinc-500 mb-2">
+                  <p className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-2">
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <h3 className="font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide text-foreground mb-3">
@@ -242,7 +243,8 @@ export default async function ServicePage({ params }: Props) {
           <section id="work" className={sectionClass}>
             <div className="max-w-[1200px] mx-auto w-full">
               <h2 className={h2Class}>Selected work</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {/* Three cards go three-up so none is orphaned on its own row */}
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 ${projects.length === 3 ? "lg:grid-cols-3" : ""}`}>
                 {projects.map((project) => (
                   <article key={project.title} className="flex flex-col">
                     <div className="overflow-hidden border border-white/10 bg-zinc-900 mb-6">
@@ -303,7 +305,7 @@ export default async function ServicePage({ params }: Props) {
                     <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">{f.q}</h3>
                     <span
                       aria-hidden="true"
-                      className="mt-1 text-2xl leading-none text-zinc-500 transition-transform duration-300 group-open:rotate-45"
+                      className="mt-1 text-2xl leading-none text-zinc-400 transition-transform duration-300 group-open:rotate-45"
                     >
                       +
                     </span>
@@ -318,7 +320,7 @@ export default async function ServicePage({ params }: Props) {
         {/* OTHER SERVICES */}
         <section className={sectionClass}>
           <div className="max-w-[1200px] mx-auto w-full">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-500 mb-6 border-b border-white/10 pb-2">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-6 border-b border-white/10 pb-2">
               Other things I build
             </h2>
             <ul className="flex flex-col">
@@ -329,7 +331,7 @@ export default async function ServicePage({ params }: Props) {
                     className="group flex items-center justify-between gap-6 py-5 text-foreground"
                   >
                     <span className="font-heading text-xl md:text-3xl font-bold uppercase tracking-tight">{s.name}</span>
-                    <ArrowRight size={22} className="shrink-0 text-zinc-500 group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+                    <ArrowRight size={22} className="shrink-0 text-zinc-400 group-hover:text-foreground group-hover:translate-x-1 transition-all" />
                   </Link>
                 </li>
               ))}
