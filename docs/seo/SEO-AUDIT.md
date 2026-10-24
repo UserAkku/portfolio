@@ -101,7 +101,7 @@ What moves the name query is the Person entity: the same @id, photo, headline an
   - maddworldcreative.com doesn't resolve in DNS.
 
   Ask the clients to restore them. If they can't, relabel those cards "Case study (site retired)" and drop the Live Demo button. I didn't change them without asking you.
-- **Lustra Skin card** says "Achieved 35% faster page loads". Keep it only if you can back it up.
+- **Lustra Skin card:** the unverified "35% faster page loads" claim was dropped when the project summaries were shortened. Add it back only if you can back it up.
 - **Blog post date** is `2024-10-07`, but the post was added in Oct 2026. If that's a typo, fix it in `content/blog/*.mdx`, because it drives `datePublished` and the sitemap.
 - **Real X/Twitter handle:** if you have one, add it to `SAME_AS` in `src/lib/site.ts` and to `twitter.creator` in `layout.tsx`.
 - **Contact promises:** "Replies within 48 hours" and "written plan and quote before any work starts" are set in `REPLY_TIME` / `NEXT_STEPS` at the top of `Contact.tsx`. Change them if they don't match how you work.
