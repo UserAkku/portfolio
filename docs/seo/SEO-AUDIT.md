@@ -43,6 +43,7 @@ Baseline numbers (production before this branch, Lighthouse 13.5): SEO 100, Acce
 | `79d67cf` | **Contact section redesign** (see §6). |
 | `dc831f4` | New home title/description, site-wide entity graph (WebSite + Person + ProfilePage + projects ItemList), About sentence linking to the service pages, real 1200×630 OG image (2.4 MB → 70 KB). |
 | `9ce81c1` | Sitemap with service pages, real dates and image entries; `/llms.txt` for AI answer engines. |
+| `d056b3a` `d90c3da` `ea98e9a` | Fixes from an independent review of the branch: no phantom "Something else" pick on the home form, navbar Contact stays on service pages, scroll fixes, og:locale everywhere, schema @id links, a 57/160-char blog title/description, contrast and layout polish on the new pages. |
 
 Visible changes, all deliberate:
 - Hero intro line now starts with "Freelance full-stack developer…" (same length).
@@ -104,6 +105,7 @@ What moves the name query is the Person entity: the same @id, photo, headline an
 - **Blog post date** is `2024-10-07`, but the post was added in Oct 2026. If that's a typo, fix it in `content/blog/*.mdx`, because it drives `datePublished` and the sitemap.
 - **Real X/Twitter handle:** if you have one, add it to `SAME_AS` in `src/lib/site.ts` and to `twitter.creator` in `layout.tsx`.
 - **Contact promises:** "Replies within 48 hours" and "written plan and quote before any work starts" are set in `REPLY_TIME` / `NEXT_STEPS` at the top of `Contact.tsx`. Change them if they don't match how you work.
+- **Inter and Space Grotesk never actually load (also true on production today).** In `globals.css`, `--font-sans: var(--font-inter)` is resolved on `:root`. But next/font only defines `--font-inter` on `<body>`, so the variable comes out empty and the whole site renders in the system font (SF Pro on Macs). The font files are still preloaded, which wastes bandwidth. Fixing it (e.g. put the font variable classes on `<html>`) would **change how the site looks**, so it was left alone. Decide whether you want the fonts you originally picked, or remove the unused font loading.
 - **Shopify proof:** none of the portfolio projects is on Shopify yet. The Shopify page says so honestly and leans on your custom e-commerce work. One real Shopify build (a client store or a public theme in a free Partner dev store) will make that page much stronger.
 
 ---
