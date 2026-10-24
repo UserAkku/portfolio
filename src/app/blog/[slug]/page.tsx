@@ -3,7 +3,7 @@ import { getPostBySlug, getAllPosts, formatDate } from "@/lib/blog";
 import { BlogMDX } from "@/components/blog/BlogMDX";
 import Link from "next/link";
 import { Metadata } from "next";
-import { SITE_URL, OG_IMAGE, PERSON_ID, toJsonLd } from "@/lib/site";
+import { SITE_URL, PERSON_ID, toJsonLd } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  // /og-image.png never existed; fall back to the site-wide OG image
-  const ogImage = post.ogImage || OG_IMAGE.url;
+  // Share images come from ./opengraph-image.tsx (a generated 1200x630 card); setting images here
+  // would override it with the 576x1024 portrait hero, which previews crop badly
   const url = `${SITE_URL}/blog/${post.slug}`;
 
   return {
@@ -40,13 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       authors: ["Akhilesh Kumar"],
       tags: post.tags,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [ogImage],
     },
     alternates: {
       canonical: url,
@@ -64,7 +62,10 @@ export default async function BlogPostPage({ params }: Props) {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
   const url = `${SITE_URL}/blog/${post.slug}`;
-  const image = post.ogImage ? new URL(post.ogImage, SITE_URL).toString() : OG_IMAGE.url;
+  const image = [
+    `${url}/opengraph-image`,
+    ...(post.ogImage ? [new URL(post.ogImage, SITE_URL).toString()] : []),
+  ];
 
   const jsonLd = {
     "@context": "https://schema.org",
