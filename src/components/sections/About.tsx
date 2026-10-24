@@ -1,4 +1,17 @@
+import Link from "next/link";
 import FadeIn from "../FadeIn";
+
+// Keyword-rich internal links from the strongest page to each service page
+const SERVICE_LINKS = [
+  { label: "custom Shopify stores", href: "/services/shopify-developer" },
+  { label: "Next.js websites", href: "/services/nextjs-developer" },
+  { label: "SaaS products", href: "/services/saas-development" },
+  { label: "AI-powered apps", href: "/services/ai-app-development" },
+  { label: "landing pages", href: "/services/landing-page-development" },
+];
+
+const linkClass =
+  "text-white font-bold underline decoration-white/25 underline-offset-[6px] hover:decoration-white transition-colors";
 
 export default function About() {
   return (
@@ -15,6 +28,15 @@ export default function About() {
             <p className="text-lg md:text-2xl lg:text-3xl leading-relaxed text-zinc-400 font-medium">
               I'm Akhilesh Kumar, currently pursuing a B.Tech in AI at{" "}
               <span className="text-white font-bold">Newton School of Technology, Rishihood University (2024–2028)</span>. 
+              As a freelance full-stack developer I build{" "}
+              {SERVICE_LINKS.map((link, i) => (
+                <span key={link.href}>
+                  <Link href={link.href} className={linkClass}>{link.label}</Link>
+                  {i < SERVICE_LINKS.length - 1 ? ", " : " and "}
+                </span>
+              ))}
+              <Link href="/services/ecommerce-development" className={linkClass}>custom-coded e-commerce</Link>{" "}
+              for founders, agencies and companies.{" "}
               I am passionate about clean architecture, user-facing impact, and shipping things that actually work. 
               For me, development isn't just about writing code it's about understanding why it's written that way and building experiences that feel effortless.
             </p>

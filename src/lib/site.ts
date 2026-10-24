@@ -3,8 +3,12 @@ export const SITE_URL = "https://www.akhileshkumar.in";
 
 export const SITE_NAME = "Akhilesh Kumar";
 
+/** Bump when home/services content changes; used as sitemap lastmod (new Date() would change every build) */
+export const SITE_UPDATED = "2026-10-25";
+
 export const OG_IMAGE = {
-  url: "https://res.cloudinary.com/docksqg0c/image/upload/v1785837882/Screenshot_2026-08-04_at_3.34.32_PM_hcxe09.png",
+  // Real 1200x630 crop (~70KB); the original is a 3024x1658, 2.4MB PNG that chat apps may skip
+  url: "https://res.cloudinary.com/docksqg0c/image/upload/c_fill,g_north,w_1200,h_630,q_auto,f_jpg/v1785837882/Screenshot_2026-08-04_at_3.34.32_PM_hcxe09.png",
   width: 1200,
   height: 630,
   alt: "Akhilesh Kumar — freelance full-stack developer portfolio",

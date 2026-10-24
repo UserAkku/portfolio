@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
-import { SITE_URL, OG_IMAGE, PERSON, PERSON_ID, SAME_AS, toJsonLd } from "@/lib/site";
+import { SITE_URL, OG_IMAGE, PERSON, PERSON_ID, WEBSITE_ID, SAME_AS, toJsonLd } from "@/lib/site";
+import { SERVICES } from "@/lib/services";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,28 +23,33 @@ const spaceGrotesk = Space_Grotesk({
   preload: true,
 });
 
+const TITLE = "Akhilesh Kumar | Freelance Full-Stack Developer in India";
+const DESCRIPTION =
+  "Akhilesh Kumar is a freelance full-stack developer building custom Shopify stores, Next.js websites, SaaS tools, AI products and landing pages for founders.";
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Akhilesh Kumar | Full-Stack Developer",
+    default: TITLE,
     template: "%s | Akhilesh Kumar",
   },
-  description:
-    "Akhilesh Kumar is a Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications and crafting premium digital experiences.",
+  description: DESCRIPTION,
   keywords: [
     "Akhilesh Kumar",
-    "Full-Stack Developer",
-    "Next.js Developer",
-    "React Developer",
-    "TypeScript",
-    "Web Developer India",
-    "Frontend Developer",
-    "Backend Developer",
-    "Portfolio",
-    "JavaScript",
-    "Node.js",
-    "PostgreSQL",
-    "Tailwind CSS",
+    "Akhilesh Kumar developer",
+    "freelance full-stack developer",
+    "freelance full stack developer India",
+    "full stack developer for hire",
+    "freelance Next.js developer",
+    "freelance Shopify developer",
+    "SaaS MVP development",
+    "AI app development",
+    "landing page developer",
+    "custom ecommerce website development",
   ],
   authors: [{ name: "Akhilesh Kumar", url: SITE_URL }],
   creator: "Akhilesh Kumar",
@@ -64,16 +70,14 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: "Akhilesh Kumar",
-    title: "Akhilesh Kumar | Full-Stack Developer",
-    description:
-      "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
+    title: TITLE,
+    description: DESCRIPTION,
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Akhilesh Kumar | Full-Stack Developer",
-    description:
-      "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
+    title: TITLE,
+    description: DESCRIPTION,
     images: [OG_IMAGE.url],
   },
   // No canonical here on purpose: alternates are inherited by every child route,
@@ -81,26 +85,64 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
+// Site-wide entity graph. Other pages reference these nodes by @id (PERSON_ID, WEBSITE_ID).
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": PERSON_ID,
-  name: "Akhilesh Kumar",
-  url: SITE_URL,
-  jobTitle: "Full-Stack Developer",
-  description:
-    "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
-  email: PERSON.email,
-  sameAs: SAME_AS,
-  knowsAbout: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Node.js",
-    "PostgreSQL",
-    "Tailwind CSS",
-    "Full-Stack Development",
-    "Web Development",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      url: SITE_URL,
+      name: "Akhilesh Kumar",
+      alternateName: ["akku", "akhileshkumar.in"],
+      description: DESCRIPTION,
+      inLanguage: "en",
+      publisher: { "@id": PERSON_ID },
+    },
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: PERSON.name,
+      givenName: "Akhilesh",
+      familyName: "Kumar",
+      alternateName: PERSON.alternateName,
+      url: SITE_URL,
+      image: PERSON.image,
+      email: `mailto:${PERSON.email}`,
+      jobTitle: PERSON.jobTitle,
+      description: DESCRIPTION,
+      address: { "@type": "PostalAddress", addressCountry: "IN" },
+      sameAs: SAME_AS,
+      affiliation: {
+        "@type": "CollegeOrUniversity",
+        name: "Newton School of Technology, Rishihood University",
+      },
+      worksFor: { "@type": "Organization", name: "Maddworld", url: "https://www.madworldd.com" },
+      knowsAbout: [
+        "Full-Stack Development",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Shopify",
+        "Headless E-commerce",
+        "SaaS Development",
+        "Large Language Models",
+        "Retrieval-Augmented Generation",
+        "PostgreSQL",
+        "Sanity CMS",
+        "Tailwind CSS",
+        "Technical SEO",
+      ],
+      makesOffer: SERVICES.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          url: `${SITE_URL}/services/${service.slug}`,
+        },
+      })),
+    },
   ],
 };
 
@@ -112,12 +154,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preconnect to Cloudinary for faster image loading */}
+        {/* Preconnect to Cloudinary for faster image loading (fonts are self-hosted by next/font) */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
-        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        {/* Preconnect to Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
