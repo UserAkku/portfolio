@@ -3,6 +3,7 @@ import { getPostBySlug, getAllPosts, formatDate } from "@/lib/blog";
 import { BlogMDX } from "@/components/blog/BlogMDX";
 import Link from "next/link";
 import { Metadata } from "next";
+import { SITE_URL, OG_IMAGE, PERSON_ID, toJsonLd } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -18,15 +19,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
-  const siteUrl = "https://www.akhileshkumar.in";
-  const ogImage = post.ogImage || `${siteUrl}/og-image.png`;
+  // /og-image.png never existed; fall back to the site-wide OG image
+  const ogImage = post.ogImage || OG_IMAGE.url;
+  const url = `${SITE_URL}/blog/${post.slug}`;
 
   return {
-    title: `${post.title} | Akhilesh Kumar`,
+    title: post.title,
     description: post.excerpt,
     keywords: post.tags,
+    authors: [{ name: "Akhilesh Kumar", url: SITE_URL }],
     openGraph: {
       type: "article",
+      url,
+      siteName: "Akhilesh Kumar",
       title: post.title,
       description: post.excerpt,
       publishedTime: post.date,
@@ -41,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [ogImage],
     },
     alternates: {
-      canonical: `${siteUrl}/blog/${post.slug}`,
+      canonical: url,
     },
   };
 }
@@ -55,29 +60,44 @@ export default async function BlogPostPage({ params }: Props) {
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const image = post.ogImage ? new URL(post.ogImage, SITE_URL).toString() : OG_IMAGE.url;
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    author: {
-      "@type": "Person",
-      name: "Akhilesh Kumar",
-      url: "https://www.akhileshkumar.in",
-    },
-    datePublished: post.date,
-    keywords: post.tags.join(", "),
-    publisher: {
-      "@type": "Person",
-      name: "Akhilesh Kumar",
-    },
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        image,
+        url,
+        mainEntityOfPage: url,
+        datePublished: post.date,
+        dateModified: post.updated || post.date,
+        keywords: post.tags.join(", "),
+        wordCount: post.wordCount,
+        inLanguage: "en",
+        author: { "@id": PERSON_ID, "@type": "Person", name: "Akhilesh Kumar", url: SITE_URL },
+        publisher: { "@id": PERSON_ID },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ],
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }}
       />
       <main className="min-h-screen bg-background pt-28">
         

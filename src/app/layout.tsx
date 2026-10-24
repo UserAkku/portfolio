@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
+import { SITE_URL, OG_IMAGE, PERSON, PERSON_ID, SAME_AS, toJsonLd } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,10 +22,8 @@ const spaceGrotesk = Space_Grotesk({
   preload: true,
 });
 
-const siteUrl = "https://www.akhileshkumar.in";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Akhilesh Kumar | Full-Stack Developer",
     template: "%s | Akhilesh Kumar",
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
     "PostgreSQL",
     "Tailwind CSS",
   ],
-  authors: [{ name: "Akhilesh Kumar", url: siteUrl }],
+  authors: [{ name: "Akhilesh Kumar", url: SITE_URL }],
   creator: "Akhilesh Kumar",
   publisher: "Akhilesh Kumar",
   robots: {
@@ -63,47 +62,36 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: siteUrl,
-    siteName: "Akhilesh Kumar | Full-Stack Developer",
+    url: SITE_URL,
+    siteName: "Akhilesh Kumar",
     title: "Akhilesh Kumar | Full-Stack Developer",
     description:
       "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
-    images: [
-      {
-        url: "https://res.cloudinary.com/docksqg0c/image/upload/v1785837882/Screenshot_2026-08-04_at_3.34.32_PM_hcxe09.png",
-        width: 1200,
-        height: 630,
-        alt: "Akhilesh Kumar — Full-Stack Developer Portfolio",
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Akhilesh Kumar | Full-Stack Developer",
     description:
       "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
-    creator: "@akhileshkumar",
-    images: ["https://res.cloudinary.com/docksqg0c/image/upload/v1785837882/Screenshot_2026-08-04_at_3.34.32_PM_hcxe09.png"],
+    images: [OG_IMAGE.url],
   },
-  alternates: {
-    canonical: siteUrl,
-  },
+  // No canonical here on purpose: alternates are inherited by every child route,
+  // which made /blog declare the home page as its canonical. Each page sets its own.
   category: "technology",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: "Akhilesh Kumar",
-  url: siteUrl,
+  url: SITE_URL,
   jobTitle: "Full-Stack Developer",
   description:
     "Full-Stack Developer specializing in Next.js, TypeScript, and React. Building high-performance, scalable web applications.",
-  email: "akhileshkumaroffical@gmail.com",
-  sameAs: [
-    "https://github.com/UserAkku",
-    "https://www.linkedin.com/in/akhilesh-kumar-736794313",
-  ],
+  email: PERSON.email,
+  sameAs: SAME_AS,
   knowsAbout: [
     "Next.js",
     "React",
@@ -133,7 +121,7 @@ export default function RootLayout({
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }}
         />
       </head>
       <body
@@ -144,7 +132,8 @@ export default function RootLayout({
         {children}
         <Analytics />
         <SpeedInsights />
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
+        {/* Only load GA with a real measurement ID; the old "G-XXXXXXXXXX" fallback fired requests to a non-existent property */}
+        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
       </body>
     </html>
   );

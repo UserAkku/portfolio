@@ -9,9 +9,11 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  updated?: string;
   excerpt: string;
   tags: string[];
   readingTime: string;
+  wordCount: number;
   featured?: boolean;
   status?: "published" | "draft";
   ogImage?: string;
@@ -42,9 +44,11 @@ export function getAllPosts(): BlogPostMeta[] {
         slug: data.slug || slug,
         title: data.title || slug,
         date: data.date || new Date().toISOString(),
+        updated: data.updated,
         excerpt: data.excerpt || "",
         tags: data.tags || [],
         readingTime: rt.text,
+        wordCount: rt.words,
         featured: data.featured || false,
         status: data.status || "published",
         ogImage: data.ogImage || "",
@@ -73,9 +77,11 @@ export function getPostBySlug(slug: string): BlogPost | null {
         slug: fileSlug,
         title: data.title || slug,
         date: data.date || new Date().toISOString(),
+        updated: data.updated,
         excerpt: data.excerpt || "",
         tags: data.tags || [],
         readingTime: rt.text,
+        wordCount: rt.words,
         featured: data.featured || false,
         status: data.status || "published",
         ogImage: data.ogImage || "",

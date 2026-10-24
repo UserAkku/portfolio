@@ -2,15 +2,32 @@ import { getAllPosts } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Metadata } from "next";
 import Link from "next/link";
+import { OG_IMAGE } from "@/lib/site";
 
+const description =
+  "Deeply researched writing on systems engineering, Rust, Bitcoin, API design, and building things that last.";
+
+// The root layout's title.template appends "| Akhilesh Kumar", so the title here must not repeat it.
+// openGraph is replaced (not merged) per segment, so it has to be complete.
 export const metadata: Metadata = {
-  title: "Blog | Akhilesh Kumar",
-  description:
-    "Deeply researched writing on systems engineering, Rust, Bitcoin, API design, and building things that last.",
+  title: "Blog",
+  description,
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
+    type: "website",
+    url: "/blog",
+    siteName: "Akhilesh Kumar",
     title: "Blog — Akhilesh Kumar",
-    description:
-      "Deeply researched writing on systems engineering, Rust, Bitcoin, API design, and building things that last.",
+    description,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Akhilesh Kumar",
+    description,
+    images: [OG_IMAGE.url],
   },
 };
 
