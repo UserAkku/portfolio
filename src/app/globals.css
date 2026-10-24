@@ -49,6 +49,44 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
+/* Hero entrance — same durations, delays and curves the framer-motion version used
+   (its default curve is easeOut = cubic-bezier(0, 0, 0.58, 1) = CSS ease-out), but driven by CSS
+   so it starts on first paint instead of after hydration. Only `transform` is animated; Tailwind's
+   translate-* utilities use the separate `translate` property, so the centering is untouched. */
+@keyframes hero-scale-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-from-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-from-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-rise-50 {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-rise-20 {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero-circle { animation: hero-scale-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both; }
+.hero-portrait { animation: hero-rise-50 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both; }
+.hero-intro { animation: hero-from-left 0.6s ease-out 0.4s both; }
+.hero-title { animation: hero-from-right 0.6s ease-out 0.5s both; }
+.hero-intro-mobile { animation: hero-rise-20 0.6s ease-out 0.4s both; }
+.hero-title-mobile { animation: hero-rise-20 0.6s ease-out 0.5s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-circle, .hero-portrait, .hero-intro, .hero-title, .hero-intro-mobile, .hero-title-mobile {
+    animation: none;
+  }
+}
+
 ::selection {
   background: #ffffff;
   color: #000000;
