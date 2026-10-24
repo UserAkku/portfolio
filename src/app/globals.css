@@ -14,8 +14,10 @@
   --font-heading: var(--font-space-grotesk);
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (pointer: fine) {

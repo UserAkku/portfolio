@@ -152,7 +152,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         {/* Preconnect to Cloudinary for faster image loading (fonts are self-hosted by next/font) */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
