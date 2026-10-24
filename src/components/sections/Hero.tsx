@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "../Icons";
 
+// Source is a 1024x1536 PNG (~2.6MB); Cloudinary f_auto/q_auto serves AVIF/WebP at a fraction of the size
+const HERO_IMAGE_BASE = "https://res.cloudinary.com/docksqg0c/image/upload";
+const HERO_IMAGE_ID = "v1785567791/ChatGPT_Image_Aug_1_2026_12_32_29_PM_q2nhcp.png";
+const HERO_IMAGE_WIDTHS = [480, 640, 828, 1024];
+
 const socialLinks = [
   { icon: GithubIcon, href: "https://github.com/UserAkku" },
   { icon: LinkedinIcon, href: "https://www.linkedin.com/in/akhilesh-kumar-736794313" },
@@ -60,8 +65,15 @@ export default function Hero() {
 
         {/* Center Image - z-20 so it's above the right text */}
         <motion.img
-          src="https://res.cloudinary.com/docksqg0c/image/upload/v1785567791/ChatGPT_Image_Aug_1_2026_12_32_29_PM_q2nhcp.png"
-          alt="Akhilesh Kumar"
+          src={`${HERO_IMAGE_BASE}/f_auto,q_auto,w_1024/${HERO_IMAGE_ID}`}
+          srcSet={HERO_IMAGE_WIDTHS.map((w) => `${HERO_IMAGE_BASE}/f_auto,q_auto,w_${w}/${HERO_IMAGE_ID} ${w}w`).join(", ")}
+          // Rendered width follows the height (2:3 portrait): 115vh → ~77vh wide on desktop, 85vh → ~57vh on tablet, 75vh → 50vh on mobile
+          sizes="(min-width: 1024px) 77vh, (min-width: 768px) 57vh, 50vh"
+          width={1024}
+          height={1536}
+          fetchPriority="high"
+          decoding="async"
+          alt="Akhilesh Kumar, freelance full-stack developer"
           // We anchor to the absolute bottom. h-[115vh] makes it overflow the top on desktop.
           className="absolute bottom-0 lg:-bottom-10 left-1/2 -translate-x-1/2 lg:-translate-x-[55%] z-20 h-[75vh] md:h-[85vh] lg:h-[115vh] w-auto object-cover object-bottom drop-shadow-2xl pointer-events-none"
           initial={{ opacity: 0, y: 50 }}
