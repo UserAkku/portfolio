@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import FadeIn from "../FadeIn";
 import { PROJECTS } from "@/lib/projects";
@@ -22,8 +20,6 @@ export default function Projects() {
         <div className="flex flex-col gap-32">
           {PROJECTS.map((project, index) => {
             const isEven = index % 2 === 1;
-            // First image gets priority loading to fix LCP
-            const isPriority = index === 0;
 
             return (
               <FadeIn key={project.title} delay={100}>
@@ -39,9 +35,9 @@ export default function Projects() {
                         src={project.image}
                         alt={project.alt}
                         className="absolute inset-0 w-full h-full object-cover"
-                        fetchPriority={isPriority ? "high" : "low"}
-                        loading={isPriority ? "eager" : "lazy"}
-                        decoding={isPriority ? "sync" : "async"}
+                        // Far below the fold: never compete with the hero (the real LCP image)
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </div>
@@ -77,6 +73,7 @@ export default function Projects() {
                           className="group flex items-center justify-center gap-2 px-6 py-3 border border-white/20 text-foreground hover:bg-white hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
                         >
                           GitHub
+                          <span className="sr-only"> repository for {project.title}</span>
                           <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
                       )}
@@ -87,6 +84,7 @@ export default function Projects() {
                         className="group flex items-center justify-center gap-2 px-6 py-3 border border-white/20 text-foreground hover:bg-white hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
                       >
                         Live Demo
+                        <span className="sr-only"> of {project.title} ({new URL(project.live).hostname})</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
