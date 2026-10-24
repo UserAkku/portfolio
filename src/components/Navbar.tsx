@@ -18,6 +18,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog";
+  // Service pages have their own contact form (with the service pre-selected and the lead's
+  // source page recorded); "/#contact" would navigate away to the home page's form instead
+  const linkHref = (link: (typeof NAV_LINKS)[number]) =>
+    link.name === "Contact" && pathname?.startsWith("/services") ? "#contact" : link.href;
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -56,7 +60,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.name}
-              href={link.href}
+              href={linkHref(link)}
               className="text-sm font-medium tracking-widest text-foreground/60 transition-colors hover:text-foreground uppercase"
             >
               {link.name}
@@ -83,7 +87,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.name}
-              href={link.href}
+              href={linkHref(link)}
               className="text-lg uppercase tracking-widest text-foreground font-heading font-bold"
               onClick={() => setIsOpen(false)}
             >

@@ -173,6 +173,8 @@ function describedBy(...ids: Array<string | false | undefined>): string | undefi
 /** On a service page, start with that service's project type already picked. */
 function typesForPath(pathname: string | null): string[] {
   const slug = pathname?.match(/^\/services\/([^/]+)/)?.[1];
+  // Without this guard "Something else" (the one type with no service) matched undefined === undefined
+  if (!slug) return [];
   const match = PROJECT_TYPES.find((type) => type.service === slug);
   return match ? [match.value] : [];
 }
@@ -231,7 +233,7 @@ function GroupLegend({ index, title, note }: { index: string; title: string; not
   return (
     <legend className="mb-6 w-full">
       <span className="flex items-center gap-4">
-        <span aria-hidden="true" className="font-heading text-sm font-bold tracking-widest text-zinc-600">
+        <span aria-hidden="true" className="font-heading text-sm font-bold tracking-widest text-zinc-400">
           {index}
         </span>
         <span className="font-heading text-base font-bold uppercase tracking-widest text-foreground md:text-lg">
@@ -353,11 +355,11 @@ export default function Contact() {
       if (panel) {
         const { top } = panel.getBoundingClientRect();
         if (top < 96 || top > window.innerHeight * 0.6) {
-          panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+          panel.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "start" });
         }
       }
     } else if (status === "error") {
-      errorBoxRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+      errorBoxRef.current?.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "nearest" });
     } else if (status === "idle" && refocusFormRef.current) {
       refocusFormRef.current = false;
       firstChipRef.current?.focus();
@@ -448,7 +450,8 @@ export default function Contact() {
     const brief: SentBrief = {
       firstName: name.split(/\s+/)[0] ?? "",
       email,
-      tags: [...types, timeline, budget].filter(Boolean),
+      // A budget can equal the timeline ("Flexible") or a type; dedupe so tags (and keys) are unique
+      tags: [...new Set([...types, timeline, budget].filter(Boolean))],
     };
 
     // Honeypot: people never see this field. Report success so bots learn nothing.
@@ -644,7 +647,7 @@ export default function Contact() {
                   </button>
                   <Link
                     href="/#projects"
-                    className={`group inline-flex min-h-11 items-center justify-center gap-2 px-2 py-3 text-sm font-semibold uppercase tracking-widest text-zinc-300 transition-colors duration-300 hover:text-white ${FOCUS_RING}`}
+                    className={`group inline-flex min-h-11 items-center justify-center gap-2 py-3 text-sm font-semibold uppercase tracking-widest text-zinc-300 transition-colors duration-300 hover:text-white ${FOCUS_RING}`}
                   >
                     See recent work
                     <ArrowRight
@@ -943,7 +946,7 @@ export default function Contact() {
                     <li key={step} className="flex gap-4 text-sm leading-relaxed text-zinc-400 md:text-base">
                       <span
                         aria-hidden="true"
-                        className="w-6 shrink-0 pt-px font-heading text-sm font-bold tracking-widest text-zinc-600"
+                        className="w-6 shrink-0 pt-px font-heading text-sm font-bold tracking-widest text-zinc-400"
                       >
                         {`0${index + 1}`}
                       </span>
@@ -986,7 +989,6 @@ export default function Contact() {
                         target="_blank"
                         // rel="me" ties these profiles to this site's identity
                         rel="me noopener noreferrer"
-                        aria-label={`${profile.label}: ${profile.handle} (opens in a new tab)`}
                         className={`group flex min-h-12 items-center justify-between gap-4 py-2 ${ROW_FOCUS_RING}`}
                       >
                         <span className="text-xs font-bold uppercase tracking-widest text-zinc-400 transition-colors duration-200 group-hover:text-white">
@@ -1000,6 +1002,8 @@ export default function Contact() {
                             className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
                           />
                         </span>
+                        {/* Not aria-label: the accessible name must contain the visible text */}
+                        <span className="sr-only"> (opens in a new tab)</span>
                       </a>
                     </li>
                   ))}
