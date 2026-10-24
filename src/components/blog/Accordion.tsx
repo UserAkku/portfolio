@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useId, useState } from "react";
+import { motion } from "framer-motion";
 
 interface AccordionProps {
   title: string;
@@ -10,11 +10,14 @@ interface AccordionProps {
 
 export function Accordion({ title, children }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
 
   return (
     <div className="rounded-[16px] border border-white/5 bg-[#0a0a0a] overflow-hidden transition-all duration-300 hover:border-white/10 hover:shadow-lg">
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
         className="flex w-full cursor-pointer items-center justify-between px-6 py-5 text-left focus:outline-none"
       >
         <span className="font-heading text-lg font-semibold text-zinc-200">
@@ -31,20 +34,20 @@ export function Accordion({ title, children }: AccordionProps) {
         </motion.div>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "anticipate" }}
-          >
-            <div className="px-6 pb-6 pt-1 text-zinc-400 prose-p:mb-4 prose-p:last:mb-0">
-              {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Always rendered (collapsed when closed) so the answer is in the server HTML for search
+          engines; it used to mount only on open, leaving every FAQ answer out of the page. */}
+      <motion.div
+        id={panelId}
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: "anticipate" }}
+        style={{ overflow: "hidden" }}
+        inert={!isOpen}
+      >
+        <div className="px-6 pb-6 pt-1 text-zinc-400 prose-p:mb-4 prose-p:last:mb-0">
+          {children}
+        </div>
+      </motion.div>
     </div>
   );
 }

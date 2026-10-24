@@ -1,4 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import { Callout } from "./Callout";
 import { DiagramBox } from "./DiagramBox";
 import { Accordion } from "./Accordion";
@@ -77,8 +79,9 @@ export function BlogMDX({ source }: BlogMDXProps) {
         components={components as never}
         options={{
           mdxOptions: {
-            remarkPlugins: [],
-            rehypePlugins: [],
+            remarkPlugins: [remarkGfm],
+            // Heading ids enable #section deep links (and "jump to" links in search results)
+            rehypePlugins: [rehypeSlug],
           },
         }}
       />

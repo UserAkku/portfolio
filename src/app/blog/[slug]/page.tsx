@@ -9,6 +9,9 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+// Only slugs from content/blog exist; anything else is a real 404
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const posts = getAllPosts();
   return posts.map((p) => ({ slug: p.slug }));
@@ -17,7 +20,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return {};
+  if (!post) notFound();
 
   // /og-image.png never existed; fall back to the site-wide OG image
   const ogImage = post.ogImage || OG_IMAGE.url;
@@ -165,7 +168,7 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Clean Flow: Metadata -> Excerpt -> Content */}
           <div className="mb-12 pt-4">
             <div className="flex flex-wrap items-center gap-4 text-[11px] text-zinc-500 font-mono mb-8 uppercase tracking-widest">
-              <span>{formatDate(post.date)}</span>
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
               <span className="hidden sm:block w-1 h-1 rounded-full bg-zinc-800" />
               <span>{post.readingTime}</span>
               <span className="hidden sm:block w-1 h-1 rounded-full bg-zinc-800" />
@@ -173,7 +176,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <div className="w-5 h-5 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 font-medium text-[8px]">
                   AK
                 </div>
-                <span>Akhilesh</span>
+                <Link href="/" rel="author" className="hover:text-zinc-200 transition-colors">Akhilesh</Link>
               </div>
             </div>
 

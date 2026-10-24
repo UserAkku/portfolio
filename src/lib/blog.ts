@@ -20,7 +20,7 @@ export interface BlogPost {
   content: string;
 }
 
-export interface BlogPostMeta extends Omit<BlogPost, "content"> {}
+export type BlogPostMeta = Omit<BlogPost, "content">;
 
 function ensureBlogDir() {
   if (!fs.existsSync(BLOG_DIR)) {
@@ -72,6 +72,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
     const fileSlug = data.slug || filename.replace(/\.mdx$/, "");
 
     if (fileSlug === slug) {
+      // Drafts are excluded from listings and the sitemap, so they must not render either
+      if ((data.status || "published") !== "published") return null;
       const rt = readingTime(content);
       return {
         slug: fileSlug,

@@ -61,6 +61,7 @@ export default function BlogPage() {
 
           <h1 className="font-heading text-[clamp(42px,7vw,80px)] font-bold text-foreground leading-none tracking-tight mb-4">
             Writing.
+            <span className="sr-only"> Blog by Akhilesh Kumar on web development, Next.js and systems engineering</span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
             Deep-dives into systems engineering, Rust, Bitcoin, and the design decisions that shape software.
