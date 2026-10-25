@@ -1,8 +1,9 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
+import ImageHero from "@/components/services/ImageHero";
+import ServiceTile from "@/components/services/ServiceTile";
 import { SERVICES, SERVICES_HUB } from "@/lib/services";
 import { SITE_URL, PERSON_ID, BASE_OPEN_GRAPH, toJsonLd } from "@/lib/site";
 
@@ -62,54 +63,41 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }} />
 
-      <main className="flex flex-col w-full relative bg-transparent">
-        <section className="pt-36 md:pt-44 pb-20 md:pb-28 px-6 md:px-12 w-full">
-          <div className="max-w-[1200px] mx-auto w-full">
-            <nav aria-label="Breadcrumb" className="mb-10">
-              <ol className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-400">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li aria-current="page" className="text-zinc-300">Services</li>
-              </ol>
-            </nav>
+      <main className="min-h-screen bg-background pt-28">
+        <ImageHero
+          image={SERVICES_HUB.hero}
+          backHref="/"
+          backLabel="Back home"
+          chips={["Freelance", "Remote, worldwide", "Replies within 48 hours"]}
+          title={SERVICES_HUB.h1}
+        />
 
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">{SERVICES_HUB.eyebrow}</p>
-            <h1 className="font-heading text-[clamp(36px,6.5vw,88px)] font-bold uppercase tracking-tight leading-[0.95] mb-8 text-foreground max-w-5xl">
-              {SERVICES_HUB.h1}
-            </h1>
-            <p className="text-lg md:text-2xl text-zinc-400 leading-relaxed font-medium max-w-3xl">
-              {SERVICES_HUB.intro}
-            </p>
+        <section className="px-6 md:px-12 pb-16 md:pb-20 w-full">
+          <div className="max-w-[1200px] mx-auto w-full">
+            <div className="max-w-[860px]">
+              <p className="font-mono text-[11px] uppercase tracking-widest text-zinc-400 mb-8">
+                {SERVICES.length} services · one developer · you own the code
+              </p>
+              <p className="text-xl md:text-[24px] text-zinc-300/90 leading-[1.7] font-light mb-10">{SERVICES_HUB.intro}</p>
+              <a
+                href="#contact"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black border border-white hover:bg-transparent hover:text-white transition-colors duration-300 uppercase tracking-widest text-sm font-semibold w-full sm:w-auto"
+              >
+                Start a project
+                <ArrowRight aria-hidden="true" size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
         </section>
 
-        <section className="pb-20 md:pb-28 px-6 md:px-12 w-full">
-          <div className="max-w-[1200px] mx-auto w-full">
-            <ul className="border-t border-white/10">
-              {SERVICES.map((s, i) => (
-                <li key={s.slug} className="border-b border-white/10">
-                  <Link
-                    href={`/services/${s.slug}`}
-                    className="group grid grid-cols-[auto_1fr_auto] items-start gap-6 md:gap-10 py-10 md:py-12 text-foreground"
-                  >
-                    <span className="text-sm font-bold uppercase tracking-widest text-zinc-400 pt-2 tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="flex flex-col gap-3">
-                      <h2 className="font-heading text-2xl md:text-4xl font-bold uppercase tracking-tight">{s.name}</h2>
-                      <p className="text-base md:text-lg text-zinc-400 leading-relaxed max-w-2xl">{s.summary}</p>
-                    </div>
-                    <ArrowRight
-                      size={28}
-                      className="mt-1 shrink-0 text-zinc-400 group-hover:text-foreground group-hover:translate-x-1 transition-all"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <section aria-label="Services" className="px-6 md:px-12 pb-20 md:pb-28 w-full">
+          <ul className="max-w-[1200px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {SERVICES.map((s, i) => (
+              <li key={s.slug}>
+                <ServiceTile service={s} index={i} showSummary headingLevel="h2" className="h-[440px] md:h-[480px]" />
+              </li>
+            ))}
+          </ul>
         </section>
 
         <Contact />
