@@ -40,7 +40,7 @@ export const SERVICES: Service[] = [
     eyebrow: "Shopify developer in India",
     h1: "Freelance Shopify Developer for Custom Stores and Themes",
     intro: "I'm a freelance Shopify developer based in India, building custom stores, Online Store 2.0 themes and headless Next.js storefronts for brands that want more than a template. I work directly with founders, D2C brands and agencies worldwide, on anything from one new section to a full store build.",
-    overviewHeading: "Theme or Headless Shopify: Which Fits?",
+    overviewHeading: "Theme or headless Shopify: which fits?",
     overview: [
       "Most Shopify projects start with the same question: is a theme enough, or do you need something custom? There are three honest answers. A well-chosen premium theme, set up properly, is the right call for many new brands: it launches quickly, your team can edit it in the theme editor, and nearly every app works with it. A custom Shopify theme makes sense once your brand or product pages need layouts no theme offers, or you're fighting a theme full of features you never use. Headless Shopify, where a Next.js storefront talks to Shopify through the Storefront API, is for stores that need fully custom experiences, content-heavy pages or one front end shared across channels.",
       "Headless is not an automatic upgrade. You lose the drag-and-drop theme editor unless you add a CMS, many apps that inject code into themes need extra integration work, and you take on a separate front-end codebase to host and maintain. Checkout runs on Shopify either way. So I start from your catalog, your team and what you need to change month to month, and I recommend the simplest build that gets you there. Often that is a custom Online Store 2.0 theme with sections and blocks your team can rearrange, metafields for product data, and lean Liquid that keeps pages fast.",
@@ -192,7 +192,7 @@ export const SERVICES: Service[] = [
     eyebrow: "Next.js developer for hire",
     h1: "Freelance Next.js Developer for Fast, SEO-Ready Websites and Web Apps",
     intro: "I build Next.js websites and web apps that load fast, are structured for search and stay easy for your team to update, from marketing sites and headless CMS builds to MVPs with accounts and payments. I'm based in India, work with founders, agencies and product teams worldwide, and write TypeScript code that you fully own.",
-    overviewHeading: "When Next.js Is the Right Call",
+    overviewHeading: "When Next.js is the right call",
     overview: [
       "Before hiring a freelance Next.js developer, it is worth settling a more basic question: should this be built on Next.js or WordPress? WordPress is a fair choice for a content-heavy blog that a non-technical team will run on plugins and themes for years. Next.js is the better fit when the site has to be fast, match a custom design exactly, and later grow into a product with logins, dashboards, payments or search. If WordPress or a site builder suits what you describe, I will tell you on the first call rather than sell you a rebuild.",
       "Speed and SEO are the usual reasons to choose Next.js, but the framework only provides the tools. The results come from using them carefully. I render pages on the server or at build time so search engines get complete HTML, give every route its own title, description and canonical URL, add structured data for products, services or articles, and load images and fonts so Largest Contentful Paint stays low and layouts don't jump. Core Web Vitals get checked before launch, not after rankings slip.",
@@ -497,7 +497,7 @@ export const SERVICES: Service[] = [
     eyebrow: "Freelance AI app developer",
     h1: "AI App Development: LLM-Powered Products and Features That Ship",
     intro: "I'm a freelance AI app developer in India building LLM-powered web apps, RAG tools and AI agents for founders, agencies and product teams worldwide. I built Krillo, a live website-audit tool where Google Gemini turns findings into specific fixes, and I build the whole app around the model: data, interface, guardrails and cost controls.",
-    overviewHeading: "APIs, RAG or a Custom Model?",
+    overviewHeading: "APIs, RAG or a custom model?",
     overview: [
       "Founders often assume the hard part of an AI product is the model. Usually it isn't. Hosted models from Google, Anthropic and OpenAI are already very capable, so the real decision is how to use them: a well-designed prompt against an API, retrieval over your own data, or, occasionally, a fine-tuned model. Training a model from scratch is almost never the right call for a startup. My default in AI app development is to start with the simplest option that passes a test set built from your real inputs, and add complexity only when those tests say it is needed.",
       "If your users ask about your documents, products, policies or records, retrieval matters more than which model you pick. The model has to see that content when it answers, not try to remember it. Doing that well means splitting content sensibly, generating embeddings, storing them in a vector database such as pgvector, Pinecone or Qdrant, retrieving the right passages, respecting who is allowed to see what, and citing sources so people can check the answer. Fine-tuning comes later, if at all. It helps when you need a consistent format or tone on a narrow task and have good labelled examples, and it does not replace retrieval.",
@@ -652,7 +652,7 @@ export const SERVICES: Service[] = [
     eyebrow: "Custom landing page development",
     h1: "Landing Page Developer: Fast, Custom-Coded Pages Built to Convert",
     intro: "I design and build custom-coded landing pages for SaaS founders, startups and agencies: launch pages, product pages, waitlists and campaign pages with editorial layouts and GSAP or Framer Motion animation. Each one is built in Next.js to load fast on a phone, and you own the code when it ships.",
-    overviewHeading: "Custom Code, Webflow or Framer?",
+    overviewHeading: "Custom code, Webflow or Framer?",
     overview: [
       "A landing page has one job: get the right visitor to take one action. That depends on four things: a message they understand in the first screen, proof placed next to the claim it supports, a page that loads fast on a mid-range phone, and a single call to action that every section leads back to. Design and motion make a product feel credible, but only when they serve those four. So when founders look for a landing page developer, the first question is not who can build it, but how it should be built.",
       "Webflow, Framer and page builders are good tools, and sometimes they are the right answer. If your marketing team will rebuild sections every week, the design fits the platform's patterns and you are happy paying for the plan, a builder is quicker to edit, and that is what I will recommend. The limits tend to show up later: scroll animation that gets heavy, platform scripts you cannot remove, form handling that runs through the platform, and a page that lives outside your product's codebase.",
@@ -782,7 +782,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "ecommerce-development",
-    hero: { id: "v1792906975/image_b5442c294896_ieg7y7.jpg", position: "bottom" },
+    hero: { id: "v1792906975/image_b5442c294896_ieg7y7.jpg", position: "center" },
     name: "Custom E-commerce Development",
     summary: "Custom-coded and headless online stores in Next.js, with server-validated checkout, payment integration and a CMS or admin your team can run without a developer.",
     linkLabel: "Custom e-commerce",
@@ -805,7 +805,7 @@ export const SERVICES: Service[] = [
     eyebrow: "Freelance e-commerce developer",
     h1: "Custom and Headless E-commerce Website Development",
     intro: "I build custom-coded online stores and headless storefronts in Next.js for D2C brands, founders and agencies who need more than a template can offer. You get the catalog, checkout and admin your business actually runs on, built for speed and search, and you own every line of the code.",
-    overviewHeading: "Shopify, Custom or Headless: How to Choose",
+    overviewHeading: "Shopify, custom or headless: how to choose",
     overview: [
       "There are three ways to get a serious online store: a hosted platform like Shopify, custom e-commerce website development from the ground up, or headless, where Next.js renders the storefront and a CMS or commerce backend holds the data. Shopify is the right call when you need to launch quickly with a standard catalog and can lean on its app ecosystem. It starts to strain when your checkout rules, product model or brand experience no longer fit a theme, and every workaround becomes another monthly app fee.",
       "A fully custom build makes sense when your business rules are what set you apart: size-level stock, coupon and shipping logic, cash on delivery, sign-in flows and an admin shaped around how your team works. Headless suits brands where presentation sells, and where editors need to change products, lookbooks and pages without waiting on a developer. Both give you full control over speed and SEO, because no theme or app layer sits between your code and the browser.",

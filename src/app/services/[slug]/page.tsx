@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ImageHero from "@/components/services/ImageHero";
 import SectionHeader from "@/components/services/SectionHeader";
 import ServiceTile from "@/components/services/ServiceTile";
+import NoBreakHyphens from "@/components/services/NoBreakHyphens";
 import { SERVICES, getService } from "@/lib/services";
 import { getProject } from "@/lib/projects";
 import { SITE_URL, PERSON, PERSON_ID, BASE_OPEN_GRAPH, toJsonLd } from "@/lib/site";
@@ -76,6 +77,26 @@ export default async function ServicePage({ params }: Props) {
   const [lead, ...rest] = service.overview;
   const jumpLinks = JUMP_LINKS.filter((l) => l.id !== "work" || projects.length > 0);
 
+  const faqCard = (
+    <div className={`${card} p-7`}>
+      <p className="font-heading text-lg font-bold text-zinc-100 mb-2">Still have a question?</p>
+      <p className="text-sm text-zinc-400 leading-relaxed mb-5">Ask me directly. I reply within 48 hours.</p>
+      <div className="flex flex-col gap-3">
+        <a href="#contact" className="group inline-flex items-center gap-2 text-sm font-semibold text-white">
+          Send a project brief
+          <ArrowRight aria-hidden="true" size={16} className="group-hover:translate-x-1 transition-transform" />
+        </a>
+        <a
+          href={`mailto:${PERSON.email}`}
+          className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors break-all"
+        >
+          <Mail aria-hidden="true" size={16} className="shrink-0" />
+          {PERSON.email}
+        </a>
+      </div>
+    </div>
+  );
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -124,7 +145,7 @@ export default async function ServicePage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }} />
 
-      <main className="min-h-screen bg-background pt-28">
+      <main className="min-h-screen bg-background pt-28 text-pretty">
         <ImageHero
           image={service.hero}
           backHref="/services"
@@ -142,9 +163,9 @@ export default async function ServicePage({ params }: Props) {
                   <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
                   Open for projects
                 </span>
-                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-zinc-700" />
+                <span aria-hidden="true" className="hidden sm:block h-1 w-1 rounded-full bg-zinc-700" />
                 <span>Remote, worldwide</span>
-                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-zinc-700" />
+                <span aria-hidden="true" className="hidden sm:block h-1 w-1 rounded-full bg-zinc-700" />
                 <span>Replies within 48 hours</span>
               </p>
               <p className="text-xl md:text-[24px] text-zinc-300/90 leading-[1.7] font-light mb-10">{service.intro}</p>
@@ -203,7 +224,7 @@ export default async function ServicePage({ params }: Props) {
                   className={`${card} p-7 md:p-8 flex flex-col transition-all duration-500 hover:border-zinc-700/80 hover:bg-zinc-800/20`}
                 >
                   <span className="font-mono text-xs tracking-widest text-zinc-400">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="font-heading text-xl font-bold text-zinc-100 leading-snug mt-8 mb-3">{d.title}</h3>
+                  <h3 className="font-heading text-xl font-bold text-zinc-100 leading-snug mt-8 mb-3 text-balance">{d.title}</h3>
                   <p className="text-zinc-400 leading-relaxed">{d.body}</p>
                 </li>
               ))}
@@ -264,15 +285,17 @@ export default async function ServicePage({ params }: Props) {
         <section id="process" aria-labelledby="process-title" className={`${section} scroll-mt-24`}>
           <div className={container}>
             <SectionHeader index="04" label="Process" title="How it works" id="process-title" />
-            <ol className="relative grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6">
-              {/* Connecting line: vertical on phones, horizontal on desktop */}
-              <span aria-hidden="true" className="absolute left-[15px] top-2 bottom-2 w-px bg-white/10 lg:left-0 lg:right-0 lg:top-[15px] lg:bottom-auto lg:h-px lg:w-auto" />
+            <ol className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6">
               {service.process.map((step, i) => (
-                <li key={step.title} className="relative pl-14 lg:pl-0 lg:pt-14">
+                // ::before draws the connector from this step's circle to the next one (none after the last)
+                <li
+                  key={step.title}
+                  className="relative pl-14 lg:pl-0 lg:pt-14 before:absolute before:bg-white/10 before:left-[15px] before:top-8 before:-bottom-10 before:w-px lg:before:left-8 lg:before:-right-6 lg:before:top-[15px] lg:before:bottom-auto lg:before:h-px lg:before:w-auto last:before:hidden"
+                >
                   <span className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black font-mono text-xs text-white">
                     {i + 1}
                   </span>
-                  <h3 className="font-heading text-lg md:text-xl font-bold text-zinc-100 leading-snug mb-3">{step.title}</h3>
+                  <h3 className="font-heading text-lg md:text-xl font-bold text-zinc-100 leading-snug mb-3 text-balance">{step.title}</h3>
                   <p className="text-sm md:text-[15px] text-zinc-400 leading-relaxed">{step.body}</p>
                 </li>
               ))}
@@ -286,7 +309,7 @@ export default async function ServicePage({ params }: Props) {
             <div className={container}>
               <SectionHeader index="05" label="Selected work" title="Live projects I've built" id="work-title" />
               <div
-                className={`grid grid-cols-1 gap-5 md:grid-cols-2 ${projects.length === 3 ? "lg:grid-cols-3" : ""} ${projects.length === 1 ? "md:max-w-[50%]" : ""}`}
+                className={`grid grid-cols-1 gap-5 md:grid-cols-2 ${projects.length === 3 ? "lg:grid-cols-3" : ""}`}
               >
                 {projects.map((project) => (
                   <a
@@ -329,9 +352,12 @@ export default async function ServicePage({ params }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 md:divide-x md:divide-white/10">
               {service.whyMe.map((w, i) => (
                 <div key={w.title} className="md:px-8 first:md:pl-0 last:md:pr-0">
-                  <p aria-hidden="true" className="font-heading text-5xl font-bold text-zinc-800 mb-6">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
+                  {/* Decorative ordinal as generated content (not text), so the faint tone isn't a contrast failure */}
+                  <p
+                    aria-hidden="true"
+                    data-n={String(i + 1).padStart(2, "0")}
+                    className="font-heading text-5xl font-bold text-zinc-800 mb-6 before:content-[attr(data-n)]"
+                  />
                   <h3 className="font-heading text-xl font-bold text-zinc-100 mb-3">{w.title}</h3>
                   <p className="text-zinc-400 leading-relaxed">{w.body}</p>
                 </div>
@@ -344,24 +370,9 @@ export default async function ServicePage({ params }: Props) {
         <section id="faq" aria-labelledby="faq-title" className={`${section} scroll-mt-24`}>
           <div className={`${container} grid grid-cols-1 lg:grid-cols-[0.9fr_1.4fr] gap-10 lg:gap-20`}>
             <div className="lg:sticky lg:top-32 lg:self-start">
-              <SectionHeader index={projects.length > 0 ? "07" : "06"} label="FAQ" title="Questions, answered" id="faq-title" className="mb-8" />
-              <div className={`${card} p-7`}>
-                <p className="font-heading text-lg font-bold text-zinc-100 mb-2">Still have a question?</p>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-5">Ask me directly. I reply within 48 hours.</p>
-                <div className="flex flex-col gap-3">
-                  <a href="#contact" className="group inline-flex items-center gap-2 text-sm font-semibold text-white">
-                    Send a project brief
-                    <ArrowRight aria-hidden="true" size={16} className="group-hover:translate-x-1 transition-transform" />
-                  </a>
-                  <a
-                    href={`mailto:${PERSON.email}`}
-                    className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors break-all"
-                  >
-                    <Mail aria-hidden="true" size={16} className="shrink-0" />
-                    {PERSON.email}
-                  </a>
-                </div>
-              </div>
+              <SectionHeader index={projects.length > 0 ? "07" : "06"} label="FAQ" title="Questions, answered" id="faq-title" className="lg:mb-8" />
+              {/* Desktop: beside the questions. Phones get the copy after the list instead. */}
+              <div className="hidden lg:block">{faqCard}</div>
             </div>
             <div className="flex flex-col gap-3">
               {service.faqs.map((f) => (
@@ -370,7 +381,9 @@ export default async function ServicePage({ params }: Props) {
                   className="group rounded-[16px] border border-white/5 bg-[#0a0a0a] transition-all duration-300 hover:border-white/10 open:border-white/10"
                 >
                   <summary className="flex cursor-pointer items-center justify-between gap-6 px-6 py-5 list-none [&::-webkit-details-marker]:hidden">
-                    <h3 className="font-heading text-base md:text-lg font-semibold text-zinc-200">{f.q}</h3>
+                    <h3 className="font-heading text-base md:text-lg font-semibold text-zinc-200">
+                      <NoBreakHyphens text={f.q} />
+                    </h3>
                     <span
                       aria-hidden="true"
                       className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 text-zinc-400 transition-transform duration-300 group-open:rotate-180"
@@ -384,6 +397,7 @@ export default async function ServicePage({ params }: Props) {
                 </details>
               ))}
             </div>
+            <div className="lg:hidden">{faqCard}</div>
           </div>
         </section>
 
@@ -401,9 +415,14 @@ export default async function ServicePage({ params }: Props) {
               </Link>
             </div>
             {/* Swipeable row on phones, five tall tiles on desktop */}
-            <div className="-mx-6 md:mx-0 px-6 md:px-0 scroll-px-6 md:scroll-px-0 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible md:pb-0">
+            <div className="-mx-6 md:mx-0 px-6 md:px-0 scroll-px-6 md:scroll-px-0 flex gap-4 overflow-x-auto snap-x snap-mandatory py-2 md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible md:py-0">
               {others.map((s) => (
-                <ServiceTile key={s.slug} service={s} className="aspect-[3/4] w-[70%] shrink-0 snap-start md:w-auto" />
+                <ServiceTile
+                  key={s.slug}
+                  service={s}
+                  sizes="(min-width: 1024px) 230px, (min-width: 768px) 33vw, 70vw"
+                  className="aspect-[3/4] w-[70%] shrink-0 snap-start md:w-auto"
+                />
               ))}
             </div>
           </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import NoBreakHyphens from "./NoBreakHyphens";
 import type { Service } from "@/lib/services.types";
 import { cropSrcSet } from "@/lib/cloudinary";
 
@@ -9,12 +10,21 @@ interface ServiceTileProps {
   showSummary?: boolean;
   /** Real heading on the hub (it lists the services); plain text where tiles are just links */
   headingLevel?: "h2" | "h3" | "p";
+  /** Rendered width hint for the srcset; defaults to the hub's 3-up grid */
+  sizes?: string;
   className?: string;
 }
 
 /** A mini version of the image hero: the service's photo with its name at the bottom-left */
-export default function ServiceTile({ service, index, showSummary = false, headingLevel = "p", className = "" }: ServiceTileProps) {
-  const img = cropSrcSet(service.hero, "tall", [480, 720]);
+export default function ServiceTile({
+  service,
+  index,
+  showSummary = false,
+  headingLevel = "p",
+  sizes = "(min-width: 1024px) 380px, (min-width: 768px) 50vw, calc(100vw - 48px)",
+  className = "",
+}: ServiceTileProps) {
+  const img = cropSrcSet(service.hero, "tall", [480, 720, 1080]);
   const Heading = headingLevel;
 
   return (
@@ -26,7 +36,7 @@ export default function ServiceTile({ service, index, showSummary = false, headi
       <img
         src={img.src}
         srcSet={img.srcSet}
-        sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 70vw"
+        sizes={sizes}
         alt=""
         loading="lazy"
         decoding="async"
@@ -46,12 +56,17 @@ export default function ServiceTile({ service, index, showSummary = false, headi
           </p>
         )}
         <Heading
-          className={`font-heading font-bold leading-tight tracking-tight text-white drop-shadow-2xl text-balance ${showSummary ? "text-2xl md:text-3xl" : "text-xl md:text-2xl lg:text-xl"}`}
+          // On the hub, reserved heights keep titles and numbers level across each row of tiles
+          className={`font-heading font-bold leading-tight tracking-tight text-white drop-shadow-2xl text-balance ${showSummary ? "text-2xl md:text-3xl md:flex md:items-end md:min-h-[3lh] xl:min-h-[2lh]" : "text-xl md:text-2xl lg:text-xl"}`}
         >
-          {/* Non-breaking hyphen so "E-commerce" never splits as "E-" / "commerce" in narrow tiles */}
-          {service.name.replace(/-/g, "\u2011")}
+          {/* One child: the heading is a flex box on the hub, and flex would drop the spaces between words */}
+          <span>
+            <NoBreakHyphens text={service.name} />
+          </span>
         </Heading>
-        {showSummary && <p className="mt-3 text-sm md:text-base leading-relaxed text-white/75">{service.summary}</p>}
+        {showSummary && (
+          <p className="mt-3 text-sm md:text-base leading-relaxed text-white/75 md:min-h-[7lh] xl:min-h-[5lh]">{service.summary}</p>
+        )}
       </div>
     </Link>
   );

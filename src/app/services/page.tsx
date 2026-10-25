@@ -63,7 +63,7 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }} />
 
-      <main className="min-h-screen bg-background pt-28">
+      <main className="min-h-screen bg-background pt-28 text-pretty">
         <ImageHero
           image={SERVICES_HUB.hero}
           backHref="/"
