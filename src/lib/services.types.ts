@@ -1,5 +1,13 @@
+export interface HeroImage {
+  /** Cloudinary path after /upload/, e.g. "v1792906975/image_x.jpg" */
+  id: string;
+  /** Which band of the (portrait) source image to keep when cropping */
+  position: "top" | "center" | "bottom";
+}
+
 export interface Service {
   slug: string;
+  hero: HeroImage;
   /** Short display name, e.g. "Shopify Development" */
   name: string;
   /** One-line summary used on the /services hub and in contact links */

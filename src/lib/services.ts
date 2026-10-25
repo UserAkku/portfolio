@@ -1,8 +1,9 @@
-import type { Service } from "./services.types";
+import type { HeroImage, Service } from "./services.types";
 
-export type { Service };
+export type { HeroImage, Service };
 
 export const SERVICES_HUB = {
+  hero: { id: "v1792906975/image_54c86970d095_fm7vek.jpg", position: "center" } as HeroImage,
   metaTitle: "Web Development Services for Startups | Akhilesh Kumar",
   metaDescription:
     "Freelance web developer for startups and brands: Shopify stores, Next.js websites, SaaS MVPs, AI apps, landing pages and custom e-commerce, built end to end.",
@@ -17,6 +18,7 @@ export const SERVICES_HUB = {
 export const SERVICES: Service[] = [
   {
     slug: "shopify-developer",
+    hero: { id: "v1792906975/image_23efbeb7ef4a_fxeubv.jpg", position: "center" },
     name: "Shopify Development",
     summary: "Custom Shopify stores, Online Store 2.0 themes and headless Shopify storefronts on Next.js, from one developer who also handles speed, SEO and app integrations.",
     linkLabel: "Shopify stores",
@@ -168,6 +170,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "nextjs-developer",
+    hero: { id: "v1792906975/image_b5442c294896_ieg7y7.jpg", position: "top" },
     name: "Next.js Development",
     summary: "Fast, SEO-ready Next.js websites and web apps, from marketing sites and Sanity-powered CMS builds to MVPs, performance fixes and App Router migrations, written in TypeScript you own.",
     linkLabel: "Next.js websites",
@@ -319,6 +322,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "saas-development",
+    hero: { id: "v1792906975/image_8dcd32e53a98_njsuew.jpg", position: "center" },
     name: "SaaS MVP Development",
     summary: "I scope your SaaS MVP down to the one workflow that matters, then build auth, billing, dashboards and admin in Next.js and PostgreSQL, with code you own.",
     linkLabel: "SaaS MVPs",
@@ -470,6 +474,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "ai-app-development",
+    hero: { id: "v1792906975/image_54c86970d095_fm7vek.jpg", position: "bottom" },
     name: "AI App Development",
     summary: "I build LLM-powered web apps, RAG knowledge tools and AI agents, or add AI features to your existing product, with API costs and data privacy planned from the first prototype.",
     linkLabel: "AI apps",
@@ -622,6 +627,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "landing-page-development",
+    hero: { id: "v1792906975/image_6f41d61ce27b_tuzuvi.jpg", position: "center" },
     name: "Landing Page Development",
     summary: "Custom landing page design and development for SaaS launches, startups and campaigns, with editorial layouts, purposeful motion and Next.js builds that load fast.",
     linkLabel: "Landing pages",
@@ -776,6 +782,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "ecommerce-development",
+    hero: { id: "v1792906975/image_b5442c294896_ieg7y7.jpg", position: "bottom" },
     name: "Custom E-commerce Development",
     summary: "Custom-coded and headless online stores in Next.js, with server-validated checkout, payment integration and a CMS or admin your team can run without a developer.",
     linkLabel: "Custom e-commerce",
